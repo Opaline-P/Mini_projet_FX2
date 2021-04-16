@@ -30,15 +30,15 @@ public class MainApp extends Application {
      */
     public MainApp() {
         // Add some sample data
-        personData.add(new Person("Hans", "Muster"));
-        personData.add(new Person("Ruth", "Mueller"));
-        personData.add(new Person("Heinz", "Kurz"));
-        personData.add(new Person("Cornelia", "Meier"));
-        personData.add(new Person("Werner", "Meyer"));
-        personData.add(new Person("Lydia", "Kunz"));
-        personData.add(new Person("Anna", "Best"));
-        personData.add(new Person("Stefan", "Meier"));
-        personData.add(new Person("Martin", "Mueller"));
+        personData.add(new Person(123, "Hans", "Muster"));
+        personData.add(new Person(14, "Ruth", "Mueller"));
+        personData.add(new Person(456, "Heinz", "Kurz"));
+        personData.add(new Person(785, "Cornelia", "Meier"));
+        personData.add(new Person(4, "Werner", "Meyer"));
+        personData.add(new Person(489, "Lydia", "Kunz"));
+        personData.add(new Person(1578, "Anna", "Best"));
+        personData.add(new Person(487, "Stefan", "Meier"));
+        personData.add(new Person(185, "Martin", "Mueller"));
     }
 
     /**
@@ -52,7 +52,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("AddressApp");
+        this.primaryStage.setTitle("GPhyApp");
 
         initRootLayout();
 
@@ -73,6 +73,8 @@ public class MainApp extends Application {
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+            //primaryStage.setHeight(400);
+            //primaryStage.setWidth(700);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

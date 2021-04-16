@@ -1,20 +1,14 @@
 package ch.makery.address.view;
 
-import ch.makery.address.util.DateUtil;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Person;
-import javafx.collections.transformation.FilteredList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
-
-public class PersonOverviewController {
+public class PersonEditChooseController {
     @FXML
     private TableView<Person> personTable;
     @FXML
@@ -42,13 +36,6 @@ public class PersonOverviewController {
     private Label cityLabel;
     @FXML
     private Label birthdayLabel;
-    @FXML
-    private TextField searchBox;
-
-    @FXML
-    private FilteredList<Person> filteredData;
-
-
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -57,7 +44,7 @@ public class PersonOverviewController {
      * The constructor.
      * The constructor is called before the initialize() method.
      */
-    public PersonOverviewController() {
+    public PersonEditChooseController() {
     }
 
     /**
@@ -80,10 +67,6 @@ public class PersonOverviewController {
 
         // Listen for selection changes and show the person details when changed.
         //personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
-
-        //Management of the search box with predicate
-        searchBox.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(createPredicate(newValue)));
-
     }
 
     /**
@@ -95,38 +78,8 @@ public class PersonOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        //personTable.setItems(mainApp.getPersonData());
-
-        //Filtered list when we are searching a student
-        filteredData = new FilteredList<>(FXCollections.observableList(this.mainApp.getPersonData()));
-        personTable.setItems(filteredData);
+        personTable.setItems(mainApp.getPersonData());
     }
-
-    /**
-     * Create the predicate
-     * @param searchText the search bar text
-     * @return ?? pas bien compris
-     */
-    private Predicate<Person> createPredicate(String searchText){
-        return person -> {
-            if (searchText == null || searchText.isEmpty()) return true;
-            return searchFindsPerson(person, searchText);
-        };
-    }
-
-
-    /**
-     * Search if a person is containing the string in the search bar
-     * @param person the person to compare with the search bar (id, names)
-     * @param searchText the search bar text
-     * @return true si the person is corresponding to the search false if not
-     */
-    private boolean searchFindsPerson(Person person, String searchText){
-        return (person.getFirstName().toLowerCase().contains(searchText.toLowerCase())) ||
-                (person.getLastName().toLowerCase().contains(searchText.toLowerCase())) ||
-                Integer.valueOf(person.getID()).toString().contains(searchText); //ou .equals
-    }
-
 
     /**
      * Fills all text fields to show details about the person.
@@ -174,12 +127,6 @@ public class PersonOverviewController {
             alert.showAndWait();
         }
     }
-
-    /*public void handleClearSearchText(ActionEvent event) {
-        searchBox.setText("");
-        event.consume();
-    }*/
-
 
     /**
      * Called when the user clicks the new button. Opens a dialog to edit
