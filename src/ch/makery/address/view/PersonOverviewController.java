@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.XMLFormatter;
 
 public class PersonOverviewController {
     @FXML
@@ -48,6 +49,11 @@ public class PersonOverviewController {
     @FXML
     private FilteredList<Person> filteredData;
 
+    @FXML
+    private Button editButton;
+
+    private String state = "View";
+
 
 
     // Reference to the main application.
@@ -74,6 +80,7 @@ public class PersonOverviewController {
         birthyearColumn.setCellValueFactory(cellData -> cellData.getValue().birthyearProperty());
         promoColumn.setCellValueFactory(cellData -> cellData.getValue().promoProperty());
         specialityColumn.setCellValueFactory(cellData -> cellData.getValue().specialityProperty());
+        editButton = new Button();
 
         // Clear person details.
         //showPersonDetails(null);
@@ -83,6 +90,8 @@ public class PersonOverviewController {
 
         //Management of the search box with predicate
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(createPredicate(newValue)));
+
+        editButton.onActionProperty().addListener((observable, oldValue, newValue) -> this.editButton.setDisable(true));
 
     }
 
@@ -95,7 +104,7 @@ public class PersonOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        //personTable.setItems(mainApp.getPersonData());
+        //personTable.setItems(this.mainApp.getPersonData());
 
         //Filtered list when we are searching a student
         filteredData = new FilteredList<>(FXCollections.observableList(this.mainApp.getPersonData()));
@@ -192,10 +201,20 @@ public class PersonOverviewController {
         if (okClicked) {
             mainApp.getPersonData().add(tempPerson);
         }
+        setMainApp(this.mainApp);
     }
 
     /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
+     * Called when the user clicks the edit button. Opens the list of students
+     * to chose the one to edit.
+     */
+    @FXML
+    private void clickEditButton() {
+        this.state = "Edit";
+        //this.editButton.setVisible(false);
+    }
+    /**
+     * Called when the user clicks the person to edit. Opens a dialog to edit
      * details for the selected person.
      */
     @FXML

@@ -29,7 +29,7 @@ public class Person {
      * Default constructor.
      */
     public Person() {
-        this(null, null, null);
+        this(0, null, null);
     }
 
     /**
@@ -47,7 +47,8 @@ public class Person {
 
         // Some initial dummy data, just for convenient testing.
         this.promo = new SimpleStringProperty("L3");
-        this.speciality = new SimpleStringProperty("some city");
+        //this.speciality = new SimpleStringProperty("some city");
+        this.speciality = new SimpleStringProperty("");
         //this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
         this.birthyear = new SimpleIntegerProperty(1999);
     }
