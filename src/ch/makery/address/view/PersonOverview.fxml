@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.PersonOverviewController">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="background" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.PersonOverviewController">
    <children>
       <SplitPane dividerPositions="0.12562814070351758, 0.23115577889447236" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -26,10 +26,10 @@
             </AnchorPane>
             <AnchorPane maxHeight="30.0" prefHeight="20.0" prefWidth="698.0">
                <children>
-                  <StackPane prefHeight="30.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <StackPane prefHeight="30.0" prefWidth="200.0" styleClass="highlight-rectangle" stylesheets="@applicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Button layoutX="10.0" layoutY="10.0" maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" text="Search" AnchorPane.leftAnchor="5.0" />
                   <TextField fx:id="searchBox" layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="100.0" promptText="Quel etudiant?" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" />
-                  <Button layoutX="10.0" layoutY="10.0" maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleClearSearchText" text="Delete" AnchorPane.rightAnchor="5.0" />
+                  <Button layoutX="10.0" layoutY="10.0" maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleClearSearchText" styleClass="delete-button" stylesheets="@applicationStyle.css" text="Delete" AnchorPane.rightAnchor="5.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
