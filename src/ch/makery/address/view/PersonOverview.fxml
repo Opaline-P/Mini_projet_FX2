@@ -17,7 +17,7 @@
                <children>
                   <ButtonBar prefHeight="40.0" prefWidth="513.0" AnchorPane.rightAnchor="10.0">
                     <buttons>
-                      <Button mnemonicParsing="false" text="View Student List" />
+                      <Button fx:id="viewButton" mnemonicParsing="false" onAction="#clickViewButton" text="View Student List" />
                         <Button mnemonicParsing="false" onAction="#handleNewPerson" text="Add a new student" />
                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#clickEditButton" text="Edit a student information" />
                     </buttons>
@@ -29,7 +29,7 @@
                   <StackPane prefHeight="30.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Button layoutX="10.0" layoutY="10.0" maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" text="Search" AnchorPane.leftAnchor="5.0" />
                   <TextField fx:id="searchBox" layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="100.0" promptText="Quel etudiant?" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" />
-                  <Button layoutX="10.0" layoutY="10.0" maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" text="Delete" AnchorPane.rightAnchor="5.0" />
+                  <Button layoutX="10.0" layoutY="10.0" maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleClearSearchText" text="Delete" AnchorPane.rightAnchor="5.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

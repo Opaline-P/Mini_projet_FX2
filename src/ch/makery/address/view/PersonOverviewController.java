@@ -19,6 +19,8 @@ public class PersonOverviewController {
     @FXML
     private TableView<Person> personTable;
     @FXML
+    private FilteredList<Person> filteredData;
+    @FXML
     private TableColumn<Person, Number> idColumn;
     @FXML
     private TableColumn<Person, String> firstNameColumn;
@@ -47,10 +49,9 @@ public class PersonOverviewController {
     private TextField searchBox;
 
     @FXML
-    private FilteredList<Person> filteredData;
-
-    @FXML
     private Button editButton;
+    @FXML
+    private Button viewButton;
 
     private String state = "View";
 
@@ -80,7 +81,7 @@ public class PersonOverviewController {
         birthyearColumn.setCellValueFactory(cellData -> cellData.getValue().birthyearProperty());
         promoColumn.setCellValueFactory(cellData -> cellData.getValue().promoProperty());
         specialityColumn.setCellValueFactory(cellData -> cellData.getValue().specialityProperty());
-        editButton = new Button();
+
 
         // Clear person details.
         //showPersonDetails(null);
@@ -91,7 +92,7 @@ public class PersonOverviewController {
         //Management of the search box with predicate
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(createPredicate(newValue)));
 
-        editButton.onActionProperty().addListener((observable, oldValue, newValue) -> this.editButton.setDisable(true));
+        //editButton.onActionProperty().addListener((observable, oldValue, newValue) -> this.editButton.setDisable(true));
 
     }
 
@@ -184,10 +185,10 @@ public class PersonOverviewController {
         }
     }
 
-    /*public void handleClearSearchText(ActionEvent event) {
+    public void handleClearSearchText() {
         searchBox.setText("");
-        event.consume();
-    }*/
+        //event.consume();
+    }
 
 
     /**
@@ -211,30 +212,51 @@ public class PersonOverviewController {
     @FXML
     private void clickEditButton() {
         this.state = "Edit";
-        //this.editButton.setVisible(false);
+        handleClearSearchText();
+        searchBox.setPromptText("Qui editer ?");
+        editButton.setDisable(true);
+        viewButton.setDisable(false);
     }
+
+
     /**
      * Called when the user clicks the person to edit. Opens a dialog to edit
      * details for the selected person.
      */
     @FXML
     private void handleEditPerson() {
-        Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
-        if (selectedPerson != null) {
-            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
-            if (okClicked) {
-                //showPersonDetails(selectedPerson);
+        if (state=="Edit") {
+            Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+            if (selectedPerson != null) {
+                boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+                if (okClicked) {
+                    //showPersonDetails(selectedPerson);
+                }
+
+            } else {
+                // Nothing selected.
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(mainApp.getPrimaryStage());
+                alert.setTitle("No Selection");
+                alert.setHeaderText("No Person Selected");
+                alert.setContentText("Please select a person in the table.");
+
+                alert.showAndWait();
             }
-
-        } else {
-            // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
-
-            alert.showAndWait();
         }
     }
+
+    /**
+     * Called when the user clicks the edit button. Opens the list of students
+     * to chose the one to edit.
+     */
+    @FXML
+    private void clickViewButton() {
+        this.state = "View";
+        handleClearSearchText();
+        searchBox.setPromptText("Quel étudiant ?");
+        editButton.setDisable(false);
+        viewButton.setDisable(true);
+    }
+
 }
