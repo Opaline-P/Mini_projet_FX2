@@ -34,8 +34,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="studentTable" layoutY="27.0" prefHeight="308.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <TableView fx:id="personTable" layoutY="27.0" onMouseClicked="#handleEditPerson" onTouchPressed="#handleEditPerson" prefHeight="308.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="studentTable" layoutY="27.0" onMouseClicked="#handleEditPerson" onTouchPressed="#handleEditPerson" prefHeight="308.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
                         <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />

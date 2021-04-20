@@ -13,7 +13,6 @@ import ch.makery.address.model.Student;
 import javafx.collections.transformation.FilteredList;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -22,9 +21,9 @@ import java.util.logging.XMLFormatter;
 public class PersonOverviewController {
     @FXML
     private TableView<Student> studentTable;
-    private TableView<Person> personTable;
+    private TableView<Student> personTable;
     @FXML
-    private FilteredList<Person> filteredData;
+    private FilteredList<Student> filteredData;
     @FXML
     private TableColumn<Student, Number> idColumn;
     @FXML
@@ -48,17 +47,15 @@ public class PersonOverviewController {
     private TextField searchBox;
 
     @FXML
-    private FilteredList<Student> filteredData;
     private Button editButton;
     @FXML
     private Button viewButton;
 
     private String state = "View";
 
-
-
     // Reference to the main application.
     private MainApp mainApp;
+
 
     /**
      * The constructor.
@@ -227,7 +224,7 @@ public class PersonOverviewController {
         if (okClicked) {
             mainApp.getPersonData().add(tempPerson);
         }
-        setMainApp(this.mainApp);
+        setMainApp(this.mainApp);*/
     }
 
     /**
@@ -241,8 +238,6 @@ public class PersonOverviewController {
         searchBox.setPromptText("Qui editer ?");
         editButton.setDisable(true);
         viewButton.setDisable(false);
-            mainApp.getStudentData().add(tempStudent);
-        }*/
     }
 
 
@@ -251,48 +246,42 @@ public class PersonOverviewController {
      * details for the selected person.
      */
     @FXML
-    private void handleEditPerson() {
-        if (state=="Edit") {
-            Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
-            if (selectedPerson != null) {
-                boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
-                if (okClicked) {
-                    //showPersonDetails(selectedPerson);
-                }
     private void handleEditPerson(ActionEvent e) {
-        Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
-        if (selectedStudent != null) {
+        if (state.equals("Edit")) {
+            Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
+            if (selectedStudent != null) {
 
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EditStudent.fxml"));
-                Parent root = loader.load();
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EditStudent.fxml"));
+                    Parent root = loader.load();
 
-                // changer de scene
-                Stage stage = new Stage();
-                stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
+                    // changer de scene
+                    Stage stage = new Stage();
+                    stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
 
-                // relier au contoller
-                EditStudentController controller = loader.getController();
-                controller.setDialogStage(stage);
-                controller.setStudent(selectedStudent);
+                    // relier au contoller
+                    EditStudentController controller = loader.getController();
+                    controller.setDialogStage(stage);
+                    controller.setStudent(selectedStudent);
 
-                stage.show();
-            /* if (okClicked) {
-                showPersonDetails(selectedStudent);
-            }*/
-            }
-            catch (Exception exception) {
-                System.out.println(exception);
-            }
+                    stage.show();
+                    /* if (okClicked) {
+                        showPersonDetails(selectedStudent);
+                    }*/
+                }
+                catch (Exception exception) {
+                    System.out.println(exception);
+                }
 
             /*boolean okClicked = mainApp.showEditStudent(selectedStudent);
             if (okClicked) {
                 //showPersonDetails(selectedPerson);
             }*/
 
-            } else {
+            }
+            else {
                 // Nothing selected.
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(mainApp.getPrimaryStage());

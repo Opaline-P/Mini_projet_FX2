@@ -1,3 +1,4 @@
+/*
 package ch.makery.address.view;
 
 import javafx.fxml.FXML;
@@ -8,11 +9,13 @@ import javafx.stage.Stage;
 import ch.makery.address.model.Student;
 import ch.makery.address.util.DateUtil;
 
+*/
 /**
  * Dialog to edit details of a person.
  *
  * @author Marco Jakob
- */
+ *//*
+
 public class PersonEditDialogController {
 
     @FXML
@@ -26,35 +29,42 @@ public class PersonEditDialogController {
     @FXML
     private TextField specialityField;
     @FXML
-    private TextField birthyearField;
+    private TextField birthYearField;
+
 
 
     private Stage dialogStage;
     private Student student;
     private boolean okClicked = false;
 
-    /**
+    */
+/**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
-     */
+     *//*
+
     @FXML
     private void initialize() {
     }
 
-    /**
+    */
+/**
      * Sets the stage of this dialog.
      *
      * @param dialogStage
-     */
+     *//*
+
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
 
-    /**
+    */
+/**
      * Sets the person to be edited in the dialog.
      *
      * @param student
-     */
+     *//*
+
     public void setPerson(Student student) {
         this.student = student;
 
@@ -71,21 +81,25 @@ public class PersonEditDialogController {
 
         promoField.setText(person.getPromo());
         specialityField.setText(person.getSpeciality());
-        birthyearField.setText(Integer.toString(person.getBirthyear()));
+        birthYearField.setText(Integer.toString(person.getBirthyear()));
     }
 
-    /**
+    */
+/**
      * Returns true if the user clicked OK, false otherwise.
      *
      * @return
-     */
+     *//*
+
     public boolean isOkClicked() {
         return okClicked;
     }
 
-    /**
+    */
+/**
      * Called when the user clicks ok.
-     */
+     *//*
+
     @FXML
     private void handleOk() {
         if (isInputValid()) {
@@ -100,26 +114,30 @@ public class PersonEditDialogController {
             person.setID(Integer.parseInt(idField.getText()));
             person.setPromo(promoField.getText());
             person.setSpeciality(specialityField.getText());
-            person.setBirthyear(Integer.parseInt(birthyearField.getText()));
+            person.setBirthyear(Integer.parseInt(birthYearField.getText()));
 
             okClicked = true;
             dialogStage.close();
         }
     }
 
-    /**
+    */
+/**
      * Called when the user clicks cancel.
-     */
+     *//*
+
     @FXML
     private void handleCancel() {
         dialogStage.close();
     }
 
-    /**
+    */
+/**
      * Validates the user input in the text fields.
      *
      * @return true if the input is valid
-     */
+     *//*
+
     private boolean isInputValid() {
         String errorMessage = "";
 
@@ -150,13 +168,15 @@ public class PersonEditDialogController {
             }
         }
 
-        if (birthyearField.getText() == null || birthyearField.getText().length() == 0) {
+        if (birthYearField.getText() == null || birthYearField.getText().length() == 0) {
             errorMessage += "No valid birthyear!\n";
-        } /*else {
+        } */
+/*else {
             if (!DateUtil.validDate(birthyearField.getText())) {
                 errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
             }
-        }*/
+        }*//*
+
 
         if (errorMessage.length() == 0) {
             return true;
@@ -173,4 +193,4 @@ public class PersonEditDialogController {
             return false;
         }
     }
-}
+}*/
