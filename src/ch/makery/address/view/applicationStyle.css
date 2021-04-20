@@ -16,8 +16,10 @@
 }
 
 .highlight-rectangle{
-    -fx-background-color: derive(-primary, 50%);
-    -fx-background-radius: 5px;
+    -fx-background-color: derive(-primary, 90%);
+    -fx-background-radius: 50px;
+    -fx-border-color:-secondary;
+    -fx-border-radius: 50px;
 }
 
 .button{

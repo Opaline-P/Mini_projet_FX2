@@ -4,10 +4,13 @@ import ch.makery.address.util.DateUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Person;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -47,6 +50,10 @@ public class PersonOverviewController {
     private Label birthdayLabel;
     @FXML
     private TextField searchBox;
+    @FXML
+    private StackPane searchStackPane;
+    @FXML
+    private AnchorPane searchAnchorPane;
 
     @FXML
     private Button editButton;
@@ -213,9 +220,13 @@ public class PersonOverviewController {
     private void clickEditButton() {
         this.state = "Edit";
         handleClearSearchText();
-        searchBox.setPromptText("Qui editer ?");
+        searchBox.setPromptText("Which student do you want to edit ?");
         editButton.setDisable(true);
+        /*editButton.set;*/
         viewButton.setDisable(false);
+        /*searchStackPane.setLeftAnchor="100.0";*/
+        searchAnchorPane.setLeftAnchor(searchStackPane, 100.0);
+        searchAnchorPane.setRightAnchor(searchStackPane, 100.0);
     }
 
 
@@ -254,9 +265,11 @@ public class PersonOverviewController {
     private void clickViewButton() {
         this.state = "View";
         handleClearSearchText();
-        searchBox.setPromptText("Quel étudiant ?");
+        searchBox.setPromptText("Search...");
         editButton.setDisable(false);
         viewButton.setDisable(true);
+        searchAnchorPane.setLeftAnchor(searchStackPane, 350.0);
+        searchAnchorPane.setRightAnchor(searchStackPane, 20.0);
     }
 
 }
