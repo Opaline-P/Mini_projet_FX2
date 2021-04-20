@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.SplitPane?>
@@ -17,19 +18,29 @@
                <children>
                   <ButtonBar prefHeight="40.0" prefWidth="513.0" AnchorPane.rightAnchor="10.0">
                     <buttons>
-                      <Button fx:id="viewButton" mnemonicParsing="false" onAction="#clickViewButton" text="View Student List" />
+                      <Button fx:id="viewButton" mnemonicParsing="false" onAction="#clickViewButton" styleClass="generalbutton" text="View Student List" />
                         <Button mnemonicParsing="false" onAction="#handleNewPerson" text="Add a new student" />
                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#clickEditButton" text="Edit a student information" />
                     </buttons>
                   </ButtonBar>
                </children>
             </AnchorPane>
-            <AnchorPane maxHeight="30.0" prefHeight="20.0" prefWidth="698.0">
+            <AnchorPane maxHeight="30.0" prefHeight="20.0" prefWidth="680.0">
                <children>
                   <StackPane prefHeight="30.0" prefWidth="200.0" styleClass="highlight-rectangle" stylesheets="@applicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="10.0" layoutY="10.0" maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" text="Search" AnchorPane.leftAnchor="5.0" />
-                  <TextField fx:id="searchBox" layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="100.0" promptText="Quel etudiant?" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" />
-                  <Button layoutX="10.0" layoutY="10.0" maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleClearSearchText" styleClass="delete-button" stylesheets="@applicationStyle.css" text="Delete" AnchorPane.rightAnchor="5.0" />
+                  <Button layoutX="15.0" layoutY="8.399999999999999" maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="8.399999999999999">
+                     <styleClass>
+                        <String fx:value="search-button" />
+                        <String fx:value="button1" />
+                     </styleClass>
+                  </Button>
+                  <TextField fx:id="searchBox" layoutX="34.0" layoutY="10.0" prefHeight="26.0" prefWidth="638.0" promptText="Quel etudiant?" styleClass="transparent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0" />
+                  <Button layoutX="10.0" layoutY="10.0" maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleClearSearchText" stylesheets="@applicationStyle.css" text="Delete" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0">
+                     <styleClass>
+                        <String fx:value="delete-button" />
+                        <String fx:value="button1" />
+                     </styleClass>
+                  </Button>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
