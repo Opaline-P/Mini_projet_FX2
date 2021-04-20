@@ -2,14 +2,19 @@ package ch.makery.address;
 
 import java.io.IOException;
 
-import ch.makery.address.model.Person;
-import ch.makery.address.view.PersonEditDialogController;
+import ch.makery.address.model.Student;
+import ch.makery.address.view.EditStudentController;
 import ch.makery.address.view.PersonOverviewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -20,33 +25,31 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
 
-    /**
-     * The data as an observable list of Persons.
-     */
-    private ObservableList<Person> personData = FXCollections.observableArrayList();
+    // The data as an observable list of Persons.
+    private ObservableList<Student> studentData = FXCollections.observableArrayList();
 
     /**
      * Constructor
      */
     public MainApp() {
         // Add some sample data
-        personData.add(new Person(123, "Hans", "Muster"));
-        personData.add(new Person(14, "Ruth", "Mueller"));
-        personData.add(new Person(456, "Heinz", "Kurz"));
-        personData.add(new Person(785, "Cornelia", "Meier"));
-        personData.add(new Person(4, "Werner", "Meyer"));
-        personData.add(new Person(489, "Lydia", "Kunz"));
-        personData.add(new Person(1578, "Anna", "Best"));
-        personData.add(new Person(487, "Stefan", "Meier"));
-        personData.add(new Person(185, "Martin", "Mueller"));
+        studentData.add(new Student(123, "Hans", "Muster", 1998, "M2", "Imaging"));
+        studentData.add(new Student(4, "Werner", "Meyer", 1997, "M2", "Biotech"));
+        studentData.add(new Student(185, "Martin", "Mueller", 1998, "M2", "Physio"));
+        studentData.add(new Student(14, "Ruth", "Mueller", 1999, "M1", "Physio"));
+        studentData.add(new Student(489, "Lydia", "Kunz", 1999, "M1", "Biotech"));
+        studentData.add(new Student(487, "Stefan", "Meier", 1997, "M1", "Imaging"));
+        studentData.add(new Student(456, "Heinz", "Kurz", 1998, "L3", null));
+        studentData.add(new Student(785, "Cornelia", "Meier", 2000, "L3", null));
+        studentData.add(new Student(1578, "Anna", "Best", 2000, "L3", null));
     }
 
     /**
      * Returns the data as an observable list of Persons.
      * @return
      */
-    public ObservableList<Person> getPersonData() {
-        return personData;
+    public ObservableList<Student> getStudentData() {
+        return studentData;
     }
 
     @Override
@@ -57,6 +60,29 @@ public class MainApp extends Application {
         initRootLayout();
 
         showPersonOverview();
+
+        // to ask a confirmation before exit
+        primaryStage.setOnCloseRequest(event -> {
+            event.consume();
+            logout(primaryStage);
+        });
+    }
+
+    /**
+     * asked a confirmation before exiting
+     * @param stage
+     */
+    public void logout (Stage stage) {
+        // pop up window before exiting
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit");
+        alert.setHeaderText("You're about to exit !");
+        alert.setContentText("Are you sure you want to exit ? All information not saved will be lost.");
+
+        if (alert.showAndWait().get() == ButtonType.OK) { // if user click on OK button
+            System.out.println("You successfully exited !");
+            stage.close();
+        }
     }
 
     /**
@@ -108,35 +134,52 @@ public class MainApp extends Application {
      * clicks OK, the changes are saved into the provided person object and true
      * is returned.
      *
-     * @param person the person object to be edited
+     * @param student the person object to be edited
      * @return true if the user clicked OK, false otherwise.
      */
-    public boolean showPersonEditDialog(Person person) {
+    public boolean showEditStudent(ActionEvent e, Student student) throws IOException {
         try {
-            // Load the fxml file and create a new stage for the popup dialog.
+            /*// Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PersonEditDialog.fxml"));
+            loader.setLocation(getClass().getResource("view/EditStudent.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Person");
+            dialogStage.setTitle("Edit Student");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
-            PersonEditDialogController controller = loader.getController();
+            // Set the person into the controller
+            EditStudentController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setPerson(person);
+            controller.setStudent(student);
 
             // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
+            dialogStage.showAndWait();*/
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/EditStudent.fxml"));
+            Parent root = loader.load();
+
+            // changer de scene
+            Stage stage = new Stage();
+            stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            // relier au contoller
+            EditStudentController controller = loader.getController();
+            controller.setDialogStage(stage);
+            controller.setStudent(student);
+
+            stage.show();
 
             return controller.isOkClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
             return false;
         }
     }

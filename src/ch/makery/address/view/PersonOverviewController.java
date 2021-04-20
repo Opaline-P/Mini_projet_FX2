@@ -1,52 +1,47 @@
 package ch.makery.address.view;
 
-import ch.makery.address.util.DateUtil;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import ch.makery.address.MainApp;
-import ch.makery.address.model.Person;
+import ch.makery.address.model.Student;
 import javafx.collections.transformation.FilteredList;
+import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Predicate;
 
 public class PersonOverviewController {
     @FXML
-    private TableView<Person> personTable;
+    private TableView<Student> studentTable;
     @FXML
-    private TableColumn<Person, Number> idColumn;
+    private TableColumn<Student, Number> idColumn;
     @FXML
-    private TableColumn<Person, String> firstNameColumn;
+    private TableColumn<Student, String> firstNameColumn;
     @FXML
-    private TableColumn<Person, String> lastNameColumn;
+    private TableColumn<Student, String> lastNameColumn;
     @FXML
-    private TableColumn<Person, String> promoColumn;
+    private TableColumn<Student, Number> birthYearColumn;
     @FXML
-    private TableColumn<Person, String> specialityColumn;
+    private TableColumn<Student, String> promoColumn;
     @FXML
-    private TableColumn<Person, Number> birthyearColumn;
+    private TableColumn<Student, String> optionColumn;
 
     @FXML
     private Label firstNameLabel;
     @FXML
     private Label lastNameLabel;
     @FXML
-    private Label streetLabel;
-    @FXML
-    private Label postalCodeLabel;
-    @FXML
-    private Label cityLabel;
-    @FXML
     private Label birthdayLabel;
     @FXML
     private TextField searchBox;
 
     @FXML
-    private FilteredList<Person> filteredData;
+    private FilteredList<Student> filteredData;
 
 
 
@@ -71,9 +66,9 @@ public class PersonOverviewController {
         //idColumn.setCellFactory(col -> new IntegerEditingCell());
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-        birthyearColumn.setCellValueFactory(cellData -> cellData.getValue().birthyearProperty());
-        promoColumn.setCellValueFactory(cellData -> cellData.getValue().promoProperty());
-        specialityColumn.setCellValueFactory(cellData -> cellData.getValue().specialityProperty());
+        birthYearColumn.setCellValueFactory(cellData -> cellData.getValue().birthYearProperty());
+        promoColumn.setCellValueFactory(cellData -> cellData.getValue().promotionProperty());
+        optionColumn.setCellValueFactory(cellData -> cellData.getValue().optionProperty());
 
         // Clear person details.
         //showPersonDetails(null);
@@ -98,8 +93,8 @@ public class PersonOverviewController {
         //personTable.setItems(mainApp.getPersonData());
 
         //Filtered list when we are searching a student
-        filteredData = new FilteredList<>(FXCollections.observableList(this.mainApp.getPersonData()));
-        personTable.setItems(filteredData);
+        filteredData = new FilteredList<>(FXCollections.observableList(this.mainApp.getStudentData()));
+        studentTable.setItems(filteredData);
     }
 
     /**
@@ -107,7 +102,7 @@ public class PersonOverviewController {
      * @param searchText the search bar text
      * @return ?? pas bien compris
      */
-    private Predicate<Person> createPredicate(String searchText){
+    private Predicate<Student> createPredicate(String searchText){
         return person -> {
             if (searchText == null || searchText.isEmpty()) return true;
             return searchFindsPerson(person, searchText);
@@ -117,14 +112,14 @@ public class PersonOverviewController {
 
     /**
      * Search if a person is containing the string in the search bar
-     * @param person the person to compare with the search bar (id, names)
+     * @param student the person to compare with the search bar (id, names)
      * @param searchText the search bar text
      * @return true si the person is corresponding to the search false if not
      */
-    private boolean searchFindsPerson(Person person, String searchText){
-        return (person.getFirstName().toLowerCase().contains(searchText.toLowerCase())) ||
-                (person.getLastName().toLowerCase().contains(searchText.toLowerCase())) ||
-                Integer.valueOf(person.getID()).toString().contains(searchText); //ou .equals
+    private boolean searchFindsPerson(Student student, String searchText){
+        return (student.getFirstName().toLowerCase().contains(searchText.toLowerCase())) ||
+                (student.getLastName().toLowerCase().contains(searchText.toLowerCase())) ||
+                Integer.valueOf(student.getID()).toString().contains(searchText); //ou .equals
     }
 
 
@@ -160,9 +155,9 @@ public class PersonOverviewController {
      */
     @FXML
     private void handleDeletePerson() {
-        int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
+        int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            personTable.getItems().remove(selectedIndex);
+            studentTable.getItems().remove(selectedIndex);
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -186,12 +181,37 @@ public class PersonOverviewController {
      * details for a new person.
      */
     @FXML
-    private void handleNewPerson() {
-        Person tempPerson = new Person();
-        boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
-        if (okClicked) {
-            mainApp.getPersonData().add(tempPerson);
+    private void handleNewPerson(ActionEvent e){
+        Student tempStudent = new Student();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EditStudent.fxml"));
+            Parent root = loader.load();
+
+            // changer de scene
+            Stage stage = new Stage();
+            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            // relier au contoller
+            EditStudentController controller = loader.getController();
+            controller.setDialogStage(stage);
+            controller.setStudent(tempStudent);
+
+            stage.show();
+            /* if (okClicked) {
+                showPersonDetails(selectedStudent);
+            }*/
         }
+        catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        /*boolean okClicked = mainApp.showEditStudent(tempStudent);
+        if (okClicked) {
+            mainApp.getStudentData().add(tempStudent);
+        }*/
     }
 
     /**
@@ -199,13 +219,38 @@ public class PersonOverviewController {
      * details for the selected person.
      */
     @FXML
-    private void handleEditPerson() {
-        Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
-        if (selectedPerson != null) {
-            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+    private void handleEditPerson(ActionEvent e) {
+        Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
+        if (selectedStudent != null) {
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EditStudent.fxml"));
+                Parent root = loader.load();
+
+                // changer de scene
+                Stage stage = new Stage();
+                stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+
+                // relier au contoller
+                EditStudentController controller = loader.getController();
+                controller.setDialogStage(stage);
+                controller.setStudent(selectedStudent);
+
+                stage.show();
+            /* if (okClicked) {
+                showPersonDetails(selectedStudent);
+            }*/
+            }
+            catch (Exception exception) {
+                System.out.println(exception);
+            }
+
+            /*boolean okClicked = mainApp.showEditStudent(selectedStudent);
             if (okClicked) {
                 //showPersonDetails(selectedPerson);
-            }
+            }*/
 
         } else {
             // Nothing selected.

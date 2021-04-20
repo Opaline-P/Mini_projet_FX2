@@ -5,7 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import ch.makery.address.model.Person;
+import ch.makery.address.model.Student;
 import ch.makery.address.util.DateUtil;
 
 /**
@@ -30,7 +30,7 @@ public class PersonEditDialogController {
 
 
     private Stage dialogStage;
-    private Person person;
+    private Student student;
     private boolean okClicked = false;
 
     /**
@@ -53,13 +53,13 @@ public class PersonEditDialogController {
     /**
      * Sets the person to be edited in the dialog.
      *
-     * @param person
+     * @param student
      */
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPerson(Student student) {
+        this.student = student;
 
-        firstNameField.setText(person.getFirstName());
-        lastNameField.setText(person.getLastName());
+        firstNameField.setText(student.getFirstName());
+        lastNameField.setText(student.getLastName());
         //streetField.setText(person.getStreet());
         //postalCodeField.setText(Integer.toString(person.getPostalCode()));
         //cityField.setText(person.getCity());
@@ -82,8 +82,8 @@ public class PersonEditDialogController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            person.setFirstName(firstNameField.getText());
-            person.setLastName(lastNameField.getText());
+            student.setFirstName(firstNameField.getText());
+            student.setLastName(lastNameField.getText());
             //person.setStreet(streetField.getText());
             //person.setPostalCode(Integer.parseInt(postalCodeField.getText()));
             //person.setCity(cityField.getText());
