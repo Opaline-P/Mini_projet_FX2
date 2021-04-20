@@ -20,13 +20,13 @@ public class PersonEditDialogController {
     @FXML
     private TextField lastNameField;
     @FXML
-    private TextField streetField;
+    private TextField idField;
     @FXML
-    private TextField postalCodeField;
+    private TextField promoField;
     @FXML
-    private TextField cityField;
+    private TextField specialityField;
     @FXML
-    private TextField birthdayField;
+    private TextField birthyearField;
 
 
     private Stage dialogStage;
@@ -65,6 +65,13 @@ public class PersonEditDialogController {
         //cityField.setText(person.getCity());
         //birthdayField.setText(DateUtil.format(person.getBirthday()));
         birthdayField.setPromptText("dd.mm.yyyy");
+        idField.setText(Integer.toString(person.getID()));
+        firstNameField.setText(person.getFirstName());
+        lastNameField.setText(person.getLastName());
+
+        promoField.setText(person.getPromo());
+        specialityField.setText(person.getSpeciality());
+        birthyearField.setText(Integer.toString(person.getBirthyear()));
     }
 
     /**
@@ -88,6 +95,12 @@ public class PersonEditDialogController {
             //person.setPostalCode(Integer.parseInt(postalCodeField.getText()));
             //person.setCity(cityField.getText());
             //person.setBirthday(DateUtil.parse(birthdayField.getText()));
+            person.setFirstName(firstNameField.getText());
+            person.setLastName(lastNameField.getText());
+            person.setID(Integer.parseInt(idField.getText()));
+            person.setPromo(promoField.getText());
+            person.setSpeciality(specialityField.getText());
+            person.setBirthyear(Integer.parseInt(birthyearField.getText()));
 
             okClicked = true;
             dialogStage.close();
@@ -116,32 +129,34 @@ public class PersonEditDialogController {
         if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
             errorMessage += "No valid last name!\n";
         }
-        if (streetField.getText() == null || streetField.getText().length() == 0) {
-            errorMessage += "No valid street!\n";
-        }
-
-        if (postalCodeField.getText() == null || postalCodeField.getText().length() == 0) {
-            errorMessage += "No valid postal code!\n";
-        } else {
+        if (idField.getText() == null || idField.getText().length() == 0) {
+            errorMessage += "No valid id!\n";
+        }else {
             // try to parse the postal code into an int.
             try {
-                Integer.parseInt(postalCodeField.getText());
+                Integer.parseInt(idField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "No valid postal code (must be an integer)!\n";
+                errorMessage += "No valid id (must be an integer)!\n";
             }
         }
 
-        if (cityField.getText() == null || cityField.getText().length() == 0) {
-            errorMessage += "No valid city!\n";
+        if (promoField.getText() == null || promoField.getText().length() == 0) {
+            errorMessage += "No valid promo!\n";
         }
 
-        if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
-            errorMessage += "No valid birthday!\n";
-        } else {
-            if (!DateUtil.validDate(birthdayField.getText())) {
+        if (promoField.getText().equals("M1") || promoField.getText().equals("M2")) {
+            if (specialityField.getText() == null || specialityField.getText().length() == 0) {
+                errorMessage += "No valid speciality!\n";
+            }
+        }
+
+        if (birthyearField.getText() == null || birthyearField.getText().length() == 0) {
+            errorMessage += "No valid birthyear!\n";
+        } /*else {
+            if (!DateUtil.validDate(birthyearField.getText())) {
                 errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
             }
-        }
+        }*/
 
         if (errorMessage.length() == 0) {
             return true;

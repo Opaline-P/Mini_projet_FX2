@@ -13,11 +13,18 @@ import ch.makery.address.model.Student;
 import javafx.collections.transformation.FilteredList;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.XMLFormatter;
 
 public class PersonOverviewController {
     @FXML
     private TableView<Student> studentTable;
+    private TableView<Person> personTable;
+    @FXML
+    private FilteredList<Person> filteredData;
     @FXML
     private TableColumn<Student, Number> idColumn;
     @FXML
@@ -42,6 +49,11 @@ public class PersonOverviewController {
 
     @FXML
     private FilteredList<Student> filteredData;
+    private Button editButton;
+    @FXML
+    private Button viewButton;
+
+    private String state = "View";
 
 
 
@@ -70,6 +82,7 @@ public class PersonOverviewController {
         promoColumn.setCellValueFactory(cellData -> cellData.getValue().promotionProperty());
         optionColumn.setCellValueFactory(cellData -> cellData.getValue().optionProperty());
 
+
         // Clear person details.
         //showPersonDetails(null);
 
@@ -78,6 +91,8 @@ public class PersonOverviewController {
 
         //Management of the search box with predicate
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(createPredicate(newValue)));
+
+        //editButton.onActionProperty().addListener((observable, oldValue, newValue) -> this.editButton.setDisable(true));
 
     }
 
@@ -90,7 +105,7 @@ public class PersonOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        //personTable.setItems(mainApp.getPersonData());
+        //personTable.setItems(this.mainApp.getPersonData());
 
         //Filtered list when we are searching a student
         filteredData = new FilteredList<>(FXCollections.observableList(this.mainApp.getStudentData()));
@@ -170,10 +185,10 @@ public class PersonOverviewController {
         }
     }
 
-    /*public void handleClearSearchText(ActionEvent event) {
+    public void handleClearSearchText() {
         searchBox.setText("");
-        event.consume();
-    }*/
+        //event.consume();
+    }
 
 
     /**
@@ -210,15 +225,40 @@ public class PersonOverviewController {
 
         /*boolean okClicked = mainApp.showEditStudent(tempStudent);
         if (okClicked) {
+            mainApp.getPersonData().add(tempPerson);
+        }
+        setMainApp(this.mainApp);
+    }
+
+    /**
+     * Called when the user clicks the edit button. Opens the list of students
+     * to chose the one to edit.
+     */
+    @FXML
+    private void clickEditButton() {
+        this.state = "Edit";
+        handleClearSearchText();
+        searchBox.setPromptText("Qui editer ?");
+        editButton.setDisable(true);
+        viewButton.setDisable(false);
             mainApp.getStudentData().add(tempStudent);
         }*/
     }
 
+
     /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
+     * Called when the user clicks the person to edit. Opens a dialog to edit
      * details for the selected person.
      */
     @FXML
+    private void handleEditPerson() {
+        if (state=="Edit") {
+            Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+            if (selectedPerson != null) {
+                boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+                if (okClicked) {
+                    //showPersonDetails(selectedPerson);
+                }
     private void handleEditPerson(ActionEvent e) {
         Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
         if (selectedStudent != null) {
@@ -252,15 +292,30 @@ public class PersonOverviewController {
                 //showPersonDetails(selectedPerson);
             }*/
 
-        } else {
-            // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            } else {
+                // Nothing selected.
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(mainApp.getPrimaryStage());
+                alert.setTitle("No Selection");
+                alert.setHeaderText("No Person Selected");
+                alert.setContentText("Please select a person in the table.");
 
-            alert.showAndWait();
+                alert.showAndWait();
+            }
         }
     }
+
+    /**
+     * Called when the user clicks the edit button. Opens the list of students
+     * to chose the one to edit.
+     */
+    @FXML
+    private void clickViewButton() {
+        this.state = "View";
+        handleClearSearchText();
+        searchBox.setPromptText("Quel étudiant ?");
+        editButton.setDisable(false);
+        viewButton.setDisable(true);
+    }
+
 }
