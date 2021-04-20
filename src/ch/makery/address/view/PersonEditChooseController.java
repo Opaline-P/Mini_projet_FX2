@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class PersonEditChooseController {
+
+    // TODO : maj des données du tableau en fct de la classe Student
     @FXML
     private TableView<Student> personTable;
     @FXML
@@ -26,24 +28,16 @@ public class PersonEditChooseController {
     @FXML
     private TableColumn<Student, String> lastNameColumn;
     @FXML
+    private TableColumn<Student, Number> birthYearColumn;
+    @FXML
     private TableColumn<Student, String> promoColumn;
     @FXML
-    private TableColumn<Student, String> specialityColumn;
-    @FXML
-    private TableColumn<Student, Number> birthyearColumn;
+    private TableColumn<Student, String> optionColumn;
 
     @FXML
     private Label firstNameLabel;
     @FXML
     private Label lastNameLabel;
-    @FXML
-    private Label streetLabel;
-    @FXML
-    private Label postalCodeLabel;
-    @FXML
-    private Label cityLabel;
-    @FXML
-    private Label birthdayLabel;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -61,12 +55,13 @@ public class PersonEditChooseController {
      */
     @FXML
     private void initialize() {
+        // TODO : maj des données en fct de la classe Student
         // Initialize the person table with the two columns.
         idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
         //idColumn.setCellFactory(col -> new IntegerEditingCell());
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-        birthyearColumn.setCellValueFactory(cellData -> cellData.getValue().birthYearProperty());
+        birthYearColumn.setCellValueFactory(cellData -> cellData.getValue().birthYearProperty());
         promoColumn.setCellValueFactory(cellData -> cellData.getValue().promotionProperty());
         promoColumn.setCellValueFactory(cellData -> cellData.getValue().optionProperty());
         //specialityColumn.setCellValueFactory(cellData -> cellData.getValue().specialityProperty());
@@ -141,6 +136,7 @@ public class PersonEditChooseController {
      * Called when the user clicks the new button. Opens a dialog to edit
      * details for a new person.
      */
+    // TODO : obliger de faire le changement de controller ici
     @FXML
     private void handleNewPerson(ActionEvent e) {
         Student tempStudent = new Student();
@@ -179,6 +175,8 @@ public class PersonEditChooseController {
      * Called when the user clicks the edit button. Opens a dialog to edit
      * details for the selected person.
      */
+    // TODO obliger de faire le changement de controller ici et non pas depuis main pck sinon
+    //  les données de l'étudiant en question sont perdues
     @FXML
     private void handleEditPerson(ActionEvent e) {
         Student selectedStudent = personTable.getSelectionModel().getSelectedItem();

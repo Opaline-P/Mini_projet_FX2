@@ -32,6 +32,7 @@ public class MainApp extends Application {
      * Constructor
      */
     public MainApp() {
+        // TODO : maj des données etudiant en fct de la classe Student
         // Add some sample data
         studentData.add(new Student(123, "Hans", "Muster", 1998, "M2", "Imaging"));
         studentData.add(new Student(4, "Werner", "Meyer", 1997, "M2", "Biotech"));
@@ -68,6 +69,7 @@ public class MainApp extends Application {
         });
     }
 
+    // TODO : rajouter pour demander une confirmation de fermeture de la fenêtre
     /**
      * asked a confirmation before exiting
      * @param stage
@@ -137,6 +139,7 @@ public class MainApp extends Application {
      * @param student the person object to be edited
      * @return true if the user clicked OK, false otherwise.
      */
+    // TODO : il lui faut un ActionEvent pour que qqc se passe
     public boolean showEditStudent(ActionEvent e, Student student) throws IOException {
         try {
             /*// Load the fxml file and create a new stage for the popup dialog.
@@ -164,18 +167,19 @@ public class MainApp extends Application {
             Parent root = loader.load();
 
             // changer de scene
-            Stage stage = new Stage();
-            stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            Stage editStage = new Stage();
+            editStage = (Stage)((Node)e.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
-            stage.setScene(scene);
+            editStage.setScene(scene);
 
             // relier au contoller
             EditStudentController controller = loader.getController();
-            controller.setDialogStage(stage);
+            controller.setDialogStage(editStage);
             controller.setStudent(student);
 
-            stage.show();
+            editStage.show();
 
+            // TODO : obliger de laisser un return mais je ne m'en sert pas
             return controller.isOkClicked();
         }
         catch (IOException exception) {

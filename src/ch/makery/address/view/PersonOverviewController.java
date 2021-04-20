@@ -192,6 +192,7 @@ public class PersonOverviewController {
      * Called when the user clicks the new button. Opens a dialog to edit
      * details for a new person.
      */
+    // TODO : idem que EditChoose : obliger de faire le chgmt de controller ici
     @FXML
     private void handleNewPerson(ActionEvent e){
         Student tempStudent = new Student();
@@ -227,24 +228,12 @@ public class PersonOverviewController {
         setMainApp(this.mainApp);*/
     }
 
-    /**
-     * Called when the user clicks the edit button. Opens the list of students
-     * to chose the one to edit.
-     */
-    @FXML
-    private void clickEditButton() {
-        this.state = "Edit";
-        handleClearSearchText();
-        searchBox.setPromptText("Qui editer ?");
-        editButton.setDisable(true);
-        viewButton.setDisable(false);
-    }
-
 
     /**
      * Called when the user clicks the person to edit. Opens a dialog to edit
      * details for the selected person.
      */
+    // TODO : idem que EditChoose : obliger de faire le chgmt de controller ici
     @FXML
     private void handleEditPerson(ActionEvent e) {
         if (state.equals("Edit")) {
@@ -305,6 +294,19 @@ public class PersonOverviewController {
         searchBox.setPromptText("Quel étudiant ?");
         editButton.setDisable(false);
         viewButton.setDisable(true);
+    }
+
+    /**
+     * Called when the user clicks the edit button. Opens the list of students
+     * to chose the one to edit.
+     */
+    @FXML
+    private void clickEditButton() {
+        this.state = "Edit";
+        handleClearSearchText();
+        searchBox.setPromptText("Qui editer ?");
+        editButton.setDisable(true);
+        viewButton.setDisable(false);
     }
 
 }

@@ -1,3 +1,6 @@
+// TODO : classe que vous avez fait avec le projet de PG que je n'utilise pas vu que j'ai fait la mienne
+//  (j'ai repris certains trucs mas de toute façon le main n'y a pas accès)
+
 /*
 package ch.makery.address.view;
 

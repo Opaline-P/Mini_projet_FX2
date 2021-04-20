@@ -11,8 +11,10 @@ import javafx.beans.property.StringProperty;
  * @author Marco Jakob
  */
 public class Student {
+    // TODO : modification de la classe Person en Student (avec refractor donc c'est fait partout)
+    //  et modification des champs pour qu'ils soient en accord avec ce qu'on fait et non avec le tuto de PG ie. un etudiant et non une personne lambda
 
-    private final IntegerProperty id; // TODO : on a vraiment besoin de garder l'Id ? :/
+    private final IntegerProperty id;
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final IntegerProperty birthYear;

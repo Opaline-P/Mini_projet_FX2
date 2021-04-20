@@ -16,6 +16,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EditStudentController implements Initializable {
+    // TODO : controller de EditStudent.fxml
+    // TODO : classe d'édition d'un eleve depuis le bouton "Edit Student"
+
     @FXML
     private TextField firstNameTextField, lastNameTextField;
     @FXML
