@@ -3,6 +3,7 @@ package ch.makery.address;
 import java.io.IOException;
 
 import ch.makery.address.model.Person;
+import ch.makery.address.view.HomePageController;
 import ch.makery.address.view.PersonEditDialogController;
 import ch.makery.address.view.PersonOverviewController;
 import javafx.application.Application;
@@ -23,7 +24,7 @@ public class MainApp extends Application {
     /**
      * The data as an observable list of Persons.
      */
-    private ObservableList<Person> personData = FXCollections.observableArrayList();
+    private final ObservableList<Person> personData = FXCollections.observableArrayList();
 
     /**
      * Constructor
@@ -56,6 +57,8 @@ public class MainApp extends Application {
 
         initRootLayout();
 
+        showHomePage();
+
         showPersonOverview();
     }
 
@@ -68,7 +71,7 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
             //loader.setLocation(MainApp.class.getResource("C:\\Users\\opali\\Documents\\Cours\\M1 G_Phy\\S2\\IHM\\JavaFX\\JavaFXtuto\\src\\ch\\makery\\address\\view\\RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
+            rootLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -85,12 +88,30 @@ public class MainApp extends Application {
     /**
      * Shows the person overview inside the root layout.
      */
+    public void showHomePage() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/HomePage.fxml"));
+            AnchorPane homePage = loader.load();
+
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(homePage);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Shows the person overview inside the root layout.
+     */
     public void showPersonOverview() {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
-            AnchorPane personOverview = (AnchorPane) loader.load();
+            AnchorPane personOverview = loader.load();
 
             // Set person overview into the center of root layout.
             rootLayout.setCenter(personOverview);
@@ -117,7 +138,7 @@ public class MainApp extends Application {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/PersonEditDialog.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
