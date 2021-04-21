@@ -86,18 +86,17 @@ public class MainApp extends Application {
     }
 
     /**
-     * Shows the person overview inside the root layout.
+     * Shows the homepage overview inside the root layout.
      */
     public void showHomePage() {
         try {
-            // Load person overview.
+            // Load homePage overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/HomePage.fxml"));
-            AnchorPane homePage = loader.load();
+            AnchorPane HomePage = loader.load();
 
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(homePage);
-
+            // Set HomePage overview into the center of root layout.
+            rootLayout.setCenter(HomePage);
         } catch (IOException e) {
             e.printStackTrace();
         }
