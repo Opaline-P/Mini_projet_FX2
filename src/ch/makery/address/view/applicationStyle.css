@@ -80,13 +80,23 @@
 }*/
 
 
+
+/*========*/
+/* TABLES */
+/*========*/
 .table-view .column-header{
-    -fx-background-color: -primary;
-    -fx-border-color:-secondary;
+    -fx-background-color: -secondary;
+    -fx-border-color:-primary;
     /*-fx-text: -primary;*/
     /*-fx-background-radius: 7px 7px 0px 0px;
     -fx-background-insets: 0 11px 0 0;
     -fx-padding: 0 0 5px 0;*/
+}
+
+/*texte de l'entete du tableau*/
+.table-view .column-header-background .label{
+    /*-fx-background-color: transparent;*/
+    -fx-text-fill: -primary;
 }
 
 .table-view .table-cell{
@@ -95,8 +105,16 @@
     /*-fx-padding: 2 0 2 10px;*/
 }
 
+/*couleur de l'effet zébré du tableau*/
 .table-row-cell:odd{
     -fx-background-color: #f5f2f6;
     /*-fx-background-insets: 0, 0 0 1 0;*/
     /*-fx-padding: 0.0em;*/
+}
+
+
+.table-row-cell:selected {
+    -fx-background-color: -secondary;
+    /*-fx-background-insets: 0;*/
+    /*-fx-background-radius: 1;*/
 }
