@@ -3,7 +3,7 @@
     /*-bg-gradient: linear-gradient(from 25px 25px to 500px 300px, #a1ffce, #faffd1);*/
     /*-hlight-gradient: linear-gradient(to bottom, #1dbbdd44, #93f9b944);*/
 
-    -primary: #b6a2c8;
+    -primary: #e8d9ef;
     -secondary: #703867;
     -tertiary: #a07ca9;
     /*-tertiary-armed: #FDDD71;*/
@@ -24,15 +24,19 @@
 
 .button{
     -fill: -primary;
-    -fx-background-color: #e8d9ef;
+    -fx-background-color: -fill;
+    /*-fx-background-color: #e8d9ef;*/
     -fx-text-fill: -secondary
 }
 
 .button:disabled{
     -fill: -secondary;
-    -fx-background-color: #4c013f;
-    -fx-text-fill: #ddbdee;
+    -fx-background-color: -fill;
+    -fx-text-fill: -primary;
+    -fx-opacity: 0.9;
 }
+
+
 
 .button1{
     -height: 12px;
@@ -55,7 +59,6 @@
 }
 
 .toggle-button{
-    /*-fx-graphic: url('http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Pizza-icon.png');*/
     -fx-background-image: url('https://www.cvo-europe.com/wp-content/uploads/2017/01/logGphy.jpg');
     -fx-background-size: 100%;
     -fx-background-repeat: no-repeat;

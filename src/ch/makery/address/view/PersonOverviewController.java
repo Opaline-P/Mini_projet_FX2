@@ -219,12 +219,13 @@ public class PersonOverviewController {
     @FXML
     private void clickEditButton() {
         this.state = "Edit";
+        //edit Button
+        editButton.setDisable(true);
+        //view Button
+        viewButton.setDisable(false);
+        //search Box
         handleClearSearchText();
         searchBox.setPromptText("Which student do you want to edit ?");
-        editButton.setDisable(true);
-        /*editButton.set;*/
-        viewButton.setDisable(false);
-        /*searchStackPane.setLeftAnchor="100.0";*/
         searchAnchorPane.setLeftAnchor(searchStackPane, 100.0);
         searchAnchorPane.setRightAnchor(searchStackPane, 100.0);
     }
@@ -264,11 +265,15 @@ public class PersonOverviewController {
     @FXML
     private void clickViewButton() {
         this.state = "View";
+        //edit Button
+        editButton.setDisable(false);
+        //view Button
+        viewButton.setDisable(true);
+        //viewButton.setStyle("-fx-background-color: -secondary; -fx-text-fill: -primary");
+        //search Box
         handleClearSearchText();
         searchBox.setPromptText("Search...");
-        editButton.setDisable(false);
-        viewButton.setDisable(true);
-        searchAnchorPane.setLeftAnchor(searchStackPane, 350.0);
+        searchAnchorPane.setLeftAnchor(searchStackPane, 400.0);
         searchAnchorPane.setRightAnchor(searchStackPane, 20.0);
     }
 

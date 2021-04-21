@@ -30,7 +30,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <StackPane fx:id="searchStackPane" layoutX="95.0" prefHeight="30.0" prefWidth="467.0" styleClass="highlight-rectangle" stylesheets="@applicationStyle.css" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="1.0">
+                  <StackPane fx:id="searchStackPane" layoutX="95.0" prefHeight="30.0" prefWidth="467.0" styleClass="highlight-rectangle" stylesheets="@applicationStyle.css" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="1.0">
                      <children>
                         <Button maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" text="Search" StackPane.alignment="CENTER_LEFT">
                            <styleClass>
