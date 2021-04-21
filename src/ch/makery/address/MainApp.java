@@ -72,6 +72,7 @@ public class MainApp extends Application {
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
+            //scene.getStylesheets().add(getClass().getResource("applicationStyle.css").toExternalForm());
             primaryStage.setScene(scene);
             //primaryStage.setHeight(400);
             //primaryStage.setWidth(700);

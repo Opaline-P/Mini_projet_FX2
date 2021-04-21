@@ -4,10 +4,13 @@ import ch.makery.address.util.DateUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Person;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -47,6 +50,10 @@ public class PersonOverviewController {
     private Label birthdayLabel;
     @FXML
     private TextField searchBox;
+    @FXML
+    private StackPane searchStackPane;
+    @FXML
+    private AnchorPane searchAnchorPane;
 
     @FXML
     private Button editButton;
@@ -212,10 +219,15 @@ public class PersonOverviewController {
     @FXML
     private void clickEditButton() {
         this.state = "Edit";
-        handleClearSearchText();
-        searchBox.setPromptText("Qui editer ?");
+        //edit Button
         editButton.setDisable(true);
+        //view Button
         viewButton.setDisable(false);
+        //search Box
+        handleClearSearchText();
+        searchBox.setPromptText("Which student do you want to edit ?");
+        searchAnchorPane.setLeftAnchor(searchStackPane, 100.0);
+        searchAnchorPane.setRightAnchor(searchStackPane, 100.0);
     }
 
 
@@ -253,10 +265,16 @@ public class PersonOverviewController {
     @FXML
     private void clickViewButton() {
         this.state = "View";
-        handleClearSearchText();
-        searchBox.setPromptText("Quel étudiant ?");
+        //edit Button
         editButton.setDisable(false);
+        //view Button
         viewButton.setDisable(true);
+        //viewButton.setStyle("-fx-background-color: -secondary; -fx-text-fill: -primary");
+        //search Box
+        handleClearSearchText();
+        searchBox.setPromptText("Search...");
+        searchAnchorPane.setLeftAnchor(searchStackPane, 400.0);
+        searchAnchorPane.setRightAnchor(searchStackPane, 20.0);
     }
 
 }
