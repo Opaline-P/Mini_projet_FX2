@@ -20,7 +20,7 @@ public class PersonEditChooseController {
 
     // TODO : maj des données du tableau en fct de la classe Student
     @FXML
-    private TableView<Student> personTable;
+    private TableView<Student> studentTable;
     @FXML
     private TableColumn<Student, Number> idColumn;
     @FXML
@@ -38,6 +38,12 @@ public class PersonEditChooseController {
     private Label firstNameLabel;
     @FXML
     private Label lastNameLabel;
+    @FXML
+    private Label birthYearLabel;
+    @FXML
+    private Label promoLabel;
+    @FXML
+    private Label optionLabel;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -82,33 +88,31 @@ public class PersonEditChooseController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        personTable.setItems(mainApp.getStudentData());
+        studentTable.setItems(mainApp.getStudentData());
     }
 
     /**
-     * Fills all text fields to show details about the person.
-     * If the specified person is null, all text fields are cleared.
+     * Fills all text fields to show details about the student.
+     * If the specified student is null, all text fields are cleared.
      *
-     * @param person the person or null
+     * @param student the student or null
      */
-    /*private void showPersonDetails(Person person) {
+    /*private void showStudentDetails(Student student) {
         if (person != null) {
             // Fill the labels with info from the person object.
-            firstNameLabel.setText(person.getFirstName());
-            lastNameLabel.setText(person.getLastName());
-            streetLabel.setText(person.getStreet());
-            //postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
-            cityLabel.setText(person.getCity());
-
-            birthdayLabel.setText(DateUtil.format(person.getBirthday()));
-        } else {
-            // Person is null, remove all the text.
+            firstNameLabel.setText(student.getFirstName());
+            lastNameLabel.setText(student.getLastName());
+            birthYearLabel.setText(DateUtil.format(student.getBirthYear()));
+            promoLabel.setText(student.getPromotion());
+            optionLabel.setText(student.getOption());
+        }
+        else {
+            // Student is null, remove all the text
             firstNameLabel.setText("");
             lastNameLabel.setText("");
-            streetLabel.setText("");
-            postalCodeLabel.setText("");
-            cityLabel.setText("");
-            birthdayLabel.setText("");
+            birthYearLabel.setText("");
+            promoLabel.setText("");
+            optionLabel.setText("");
         }
     }*/
 
@@ -116,10 +120,10 @@ public class PersonEditChooseController {
      * Called when the user clicks on the delete button.
      */
     @FXML
-    private void handleDeletePerson() {
-        int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
+    private void handleDeleteStudent() {
+        int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            personTable.getItems().remove(selectedIndex);
+            studentTable.getItems().remove(selectedIndex);
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -138,7 +142,7 @@ public class PersonEditChooseController {
      */
     // TODO : obliger de faire le changement de controller ici
     @FXML
-    private void handleNewPerson(ActionEvent e) {
+    private void handleNewStudent(ActionEvent e) {
         Student tempStudent = new Student();
 
         try {
@@ -178,8 +182,8 @@ public class PersonEditChooseController {
     // TODO obliger de faire le changement de controller ici et non pas depuis main pck sinon
     //  les données de l'étudiant en question sont perdues
     @FXML
-    private void handleEditPerson(ActionEvent e) {
-        Student selectedStudent = personTable.getSelectionModel().getSelectedItem();
+    private void handleEditStudent(ActionEvent e) {
+        Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
         if (selectedStudent != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EditStudent.fxml"));

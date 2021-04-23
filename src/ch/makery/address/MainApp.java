@@ -2,9 +2,7 @@ package ch.makery.address;
 
 import java.io.IOException;
 
-import ch.makery.address.model.Person;
 import ch.makery.address.view.HomePageController;
-import ch.makery.address.view.PersonEditDialogController;
 import ch.makery.address.model.Student;
 import ch.makery.address.view.EditStudentController;
 import ch.makery.address.view.PersonOverviewController;
@@ -50,7 +48,6 @@ public class MainApp extends Application {
 
     /**
      * Returns the data as an observable list of Persons.
-     * @return
      */
     public ObservableList<Student> getStudentData() {
         return studentData;
@@ -63,7 +60,7 @@ public class MainApp extends Application {
 
         initRootLayout();
 
-        showHomePage();
+        //showHomePage();
 
         showPersonOverview();
 
@@ -77,7 +74,7 @@ public class MainApp extends Application {
     // TODO : rajouter pour demander une confirmation de fermeture de la fenêtre
     /**
      * asked a confirmation before exiting
-     * @param stage
+     * @param stage Stage
      */
     public void logout (Stage stage) {
         // pop up window before exiting
@@ -98,17 +95,14 @@ public class MainApp extends Application {
     public void initRootLayout() {
         try {
             // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/EditStudent.fxml"));
+            Parent root = loader.load();
             //loader.setLocation(MainApp.class.getResource("C:\\Users\\opali\\Documents\\Cours\\M1 G_Phy\\S2\\IHM\\JavaFX\\JavaFXtuto\\src\\ch\\makery\\address\\view\\RootLayout.fxml"));
-            rootLayout = loader.load();
 
             // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
+            Scene scene = new Scene(root, 700, 400);
             //scene.getStylesheets().add(getClass().getResource("applicationStyle.css").toExternalForm());
             primaryStage.setScene(scene);
-            //primaryStage.setHeight(400);
-            //primaryStage.setWidth(700);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -162,8 +156,8 @@ public class MainApp extends Application {
      * @param student the person object to be edited
      * @return true if the user clicked OK, false otherwise.
      */
-    // TODO : il lui faut un ActionEvent pour que qqc se passe
-    public boolean showEditStudent(ActionEvent e, Student student) throws IOException {
+    // TODO : il lui faut un ActionEvent pour que qqc se passe donc ça bloque si on le laisse dans le main
+    public boolean showEditStudent(ActionEvent e, Student student) {
         try {
             /*// Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();

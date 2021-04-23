@@ -24,7 +24,6 @@ import java.util.logging.XMLFormatter;
 public class PersonOverviewController {
     @FXML
     private TableView<Student> studentTable;
-    private TableView<Student> personTable;
     @FXML
     private FilteredList<Student> filteredData;
     @FXML
@@ -45,7 +44,7 @@ public class PersonOverviewController {
     @FXML
     private Label lastNameLabel;
     @FXML
-    private Label birthdayLabel;
+    private Label birthYearLabel;
     @FXML
     private TextField searchBox;
     @FXML
@@ -86,13 +85,6 @@ public class PersonOverviewController {
         promoColumn.setCellValueFactory(cellData -> cellData.getValue().promotionProperty());
         optionColumn.setCellValueFactory(cellData -> cellData.getValue().optionProperty());
 
-
-        // Clear person details.
-        //showPersonDetails(null);
-
-        // Listen for selection changes and show the person details when changed.
-        //personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
-
         //Management of the search box with predicate
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(createPredicate(newValue)));
 
@@ -103,7 +95,7 @@ public class PersonOverviewController {
     /**
      * Is called by the main application to give a reference back to itself.
      *
-     * @param mainApp
+     * @param mainApp MainApp
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -177,7 +169,8 @@ public class PersonOverviewController {
         int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             studentTable.getItems().remove(selectedIndex);
-        } else {
+        }
+        else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
@@ -197,11 +190,11 @@ public class PersonOverviewController {
 
     /**
      * Called when the user clicks the new button. Opens a dialog to edit
-     * details for a new person.
+     * details for a new student.
      */
     // TODO : idem que EditChoose : obliger de faire le chgmt de controller ici
     @FXML
-    private void handleNewPerson(ActionEvent e){
+    private void handleNewStudent(ActionEvent e){
         Student tempStudent = new Student();
 
         try {
@@ -256,11 +249,11 @@ public class PersonOverviewController {
 
     /**
      * Called when the user clicks the person to edit. Opens a dialog to edit
-     * details for the selected person.
+     * details for the selected student.
      */
     // TODO : idem que EditChoose : obliger de faire le chgmt de controller ici
     @FXML
-    private void handleEditPerson(ActionEvent e) {
+    private void handleEditStudent(ActionEvent e) {
         if (state.equals("Edit")) {
             Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
             if (selectedStudent != null) {
@@ -270,17 +263,17 @@ public class PersonOverviewController {
                     Parent root = loader.load();
 
                     // changer de scene
-                    Stage stage = new Stage();
-                    stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    Stage editStage = new Stage();
+                    editStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root);
-                    stage.setScene(scene);
+                    editStage.setScene(scene);
 
                     // relier au contoller
                     EditStudentController controller = loader.getController();
-                    controller.setDialogStage(stage);
+                    controller.setDialogStage(editStage);
                     controller.setStudent(selectedStudent);
 
-                    stage.show();
+                    editStage.show();
                     /* if (okClicked) {
                         showPersonDetails(selectedStudent);
                     }*/
@@ -325,19 +318,6 @@ public class PersonOverviewController {
         searchBox.setPromptText("Search...");
         searchAnchorPane.setLeftAnchor(searchStackPane, 400.0);
         searchAnchorPane.setRightAnchor(searchStackPane, 20.0);
-    }
-
-    /**
-     * Called when the user clicks the edit button. Opens the list of students
-     * to chose the one to edit.
-     */
-    @FXML
-    private void clickEditButton() {
-        this.state = "Edit";
-        handleClearSearchText();
-        searchBox.setPromptText("Qui editer ?");
-        editButton.setDisable(true);
-        viewButton.setDisable(false);
     }
 
 }

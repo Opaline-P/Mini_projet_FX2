@@ -16,8 +16,8 @@
                   <ButtonBar prefHeight="40.0" prefWidth="513.0" AnchorPane.rightAnchor="10.0">
                     <buttons>
                       <Button mnemonicParsing="false" text="View Student List" />
-                        <Button mnemonicParsing="false" onAction="#handleNewPerson" text="Add a new student" />
-                        <Button mnemonicParsing="false" onAction="#handleEditPerson" text="Edit a student information" />
+                        <Button mnemonicParsing="false" onAction="#handleNewStudent" text="Add a new student" />
+                        <Button mnemonicParsing="false" onAction="#handleEditStudent" text="Edit a student information" />
                     </buttons>
                   </ButtonBar>
                </children>
@@ -31,7 +31,7 @@
                         <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
                         <TableColumn fx:id="birthYearColumn" prefWidth="75.0" text="Birth year" />
                         <TableColumn fx:id="promoColumn" prefWidth="75.0" text="Promo" />
-                        <TableColumn fx:id="specialityColumn" prefWidth="75.0" text="Speciality" />
+                        <TableColumn fx:id="optionColumn" prefWidth="75.0" text="Speciality" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

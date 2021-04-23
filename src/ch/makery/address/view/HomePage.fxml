@@ -11,7 +11,7 @@
       <ImageView fitHeight="126.0" fitWidth="226.0" layoutX="280.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image>
-                <url>@../Images/Welcome%20on%20Gphy%20app%20(1).png</url>
+<!--                <url>../Images/BeHappyBeGphy.png</url>-->
             </Image>
          </image>
       </ImageView>
@@ -31,14 +31,14 @@
       <ImageView fitHeight="212.0" fitWidth="250.0" layoutX="237.0" layoutY="63.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image>
-                <url>@../Images/Welcome%20on%20Gphy%20app.png</url>
+<!--                <url>@../Images/WelcomeOnGphyApp.png</url>-->
             </Image>
          </image>
       </ImageView>
       <ImageView fitHeight="191.0" fitWidth="196.0" layoutY="-60.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image>
-                <url>@../Images/Welcome%20on%20Gphy%20app%20(2).png</url>
+<!--                <url>@../Images/LogoGphyApp.png</url>-->
             </Image>
          </image>
       </ImageView>
