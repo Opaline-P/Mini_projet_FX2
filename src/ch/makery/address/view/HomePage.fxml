@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="background" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.PersonOverviewController">
+   <children>
+      <ImageView fitHeight="126.0" fitWidth="226.0" layoutX="280.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image>
+                <url>@../Images/Welcome%20on%20Gphy%20app%20(1).png</url>
+            </Image>
+         </image>
+      </ImageView>
+      <ButtonBar layoutX="96.0" layoutY="16.0" prefHeight="40.0" prefWidth="590.0">
+        <buttons>
+          <Button mnemonicParsing="false" text="View Student List" />
+            <Button layoutX="135.0" layoutY="15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="168.0" text="Edit a student information" />
+            <Button layoutX="135.0" layoutY="15.0" mnemonicParsing="false" text="Add a new student" />
+        </buttons>
+      </ButtonBar>
+      <ButtonBar layoutX="294.0" layoutY="56.0" prefHeight="40.0" prefWidth="391.0">
+        <buttons>
+            <TextField maxHeight="50.0" maxWidth="210.0" prefHeight="24.0" prefWidth="394.0" />
+          <Button maxWidth="77.0" mnemonicParsing="false" prefHeight="30.0" text="Search" />
+        </buttons>
+      </ButtonBar>
+      <ImageView fitHeight="212.0" fitWidth="250.0" layoutX="237.0" layoutY="63.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image>
+                <url>@../Images/Welcome%20on%20Gphy%20app.png</url>
+            </Image>
+         </image>
+      </ImageView>
+      <ImageView fitHeight="191.0" fitWidth="196.0" layoutY="-60.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image>
+                <url>@../Images/Welcome%20on%20Gphy%20app%20(2).png</url>
+            </Image>
+         </image>
+      </ImageView>
+      <Text fontSmoothingType="LCD" layoutX="149.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You can view the Gphy student,  add a new student or edit a student information" textAlignment="CENTER" wrappingWidth="422.84149169921875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

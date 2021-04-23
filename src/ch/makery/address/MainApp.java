@@ -2,6 +2,9 @@ package ch.makery.address;
 
 import java.io.IOException;
 
+import ch.makery.address.model.Person;
+import ch.makery.address.view.HomePageController;
+import ch.makery.address.view.PersonEditDialogController;
 import ch.makery.address.model.Student;
 import ch.makery.address.view.EditStudentController;
 import ch.makery.address.view.PersonOverviewController;
@@ -60,6 +63,8 @@ public class MainApp extends Application {
 
         initRootLayout();
 
+        showHomePage();
+
         showPersonOverview();
 
         // to ask a confirmation before exit
@@ -96,14 +101,32 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
             //loader.setLocation(MainApp.class.getResource("C:\\Users\\opali\\Documents\\Cours\\M1 G_Phy\\S2\\IHM\\JavaFX\\JavaFXtuto\\src\\ch\\makery\\address\\view\\RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
+            rootLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
+            //scene.getStylesheets().add(getClass().getResource("applicationStyle.css").toExternalForm());
             primaryStage.setScene(scene);
             //primaryStage.setHeight(400);
             //primaryStage.setWidth(700);
             primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Shows the homepage overview inside the root layout.
+     */
+    public void showHomePage() {
+        try {
+            // Load homePage overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/HomePage.fxml"));
+            AnchorPane HomePage = loader.load();
+
+            // Set HomePage overview into the center of root layout.
+            rootLayout.setCenter(HomePage);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -117,7 +140,7 @@ public class MainApp extends Application {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
-            AnchorPane personOverview = (AnchorPane) loader.load();
+            AnchorPane personOverview = loader.load();
 
             // Set person overview into the center of root layout.
             rootLayout.setCenter(personOverview);
