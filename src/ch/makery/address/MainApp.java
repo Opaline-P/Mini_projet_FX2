@@ -92,7 +92,7 @@ public class MainApp extends Application {
     /**
      * Initializes the root layout.
      */
-    public void initRootLayout() {
+    /*public void initRootLayout() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader(getClass().getResource("view/EditStudent.fxml"));
@@ -103,6 +103,29 @@ public class MainApp extends Application {
             Scene scene = new Scene(root, 700, 400);
             //scene.getStylesheets().add(getClass().getResource("applicationStyle.css").toExternalForm());
             primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    /**
+     * Initializes the root layout.
+     */
+    public void initRootLayout() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+            //loader.setLocation(MainApp.class.getResource("C:\\Users\\opali\\Documents\\Cours\\M1 G_Phy\\S2\\IHM\\JavaFX\\JavaFXtuto\\src\\ch\\makery\\address\\view\\RootLayout.fxml"));
+            rootLayout = (BorderPane) loader.load();
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(rootLayout);
+            //scene.getStylesheets().add(getClass().getResource("applicationStyle.css").toExternalForm());
+            primaryStage.setScene(scene);
+            //primaryStage.setHeight(400);
+            //primaryStage.setWidth(700);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

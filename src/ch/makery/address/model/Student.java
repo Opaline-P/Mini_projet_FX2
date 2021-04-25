@@ -25,7 +25,7 @@ public class Student {
      * Default constructor.
      */
     public Student() {
-        this(null, null, null, 1950, null, null);
+        this(0, null, null, 1950, null, null);
     }
 
     /**
