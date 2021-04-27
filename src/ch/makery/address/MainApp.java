@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import ch.makery.address.model.Student;
 import ch.makery.address.view.EditStudentController;
+import ch.makery.address.view.HomePageController;
 import ch.makery.address.view.PersonOverviewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -142,6 +143,11 @@ public class MainApp extends Application {
 
             // Set person overview into the center of root layout.
             rootLayout.setCenter(HomePage);
+
+            // Give the controller access to the main app.
+            HomePageController controller = loader.getController();
+            controller.setMainApp(this);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

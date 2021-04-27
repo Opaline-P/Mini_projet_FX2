@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="background" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="background" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.HomePageController">
    <children>
       <SplitPane dividerPositions="0.2414658634538153" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -25,9 +25,9 @@
                   </SplitPane>
                   <ButtonBar layoutX="-31.0" prefHeight="94.0" prefWidth="730.0" stylesheets="@applicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-31.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                     <buttons>
-                        <Button mnemonicParsing="false" prefHeight="28.0" text="View Student List" />
-                        <Button mnemonicParsing="false" prefHeight="28.0" text="Add a new student" />
-                        <Button mnemonicParsing="false" prefHeight="28.0" text="Edit a student information" />
+                        <Button fx:id="ButtonViewList" mnemonicParsing="false" prefHeight="28.0" text="View Student List" />
+                        <Button fx:id="ButtonAddStudent" mnemonicParsing="false" prefHeight="28.0" text="Add a new student" />
+                        <Button fx:id="ButtonEditStudent" mnemonicParsing="false" prefHeight="28.0" text="Edit a student information" />
                     </buttons>
                   </ButtonBar>
                </children>
@@ -45,7 +45,7 @@
                               <Insets left="10.0" />
                            </StackPane.margin>
                         </Button>
-                        <TextField prefHeight="26.0" prefWidth="602.0" promptText="Search..." styleClass="transparent" stylesheets="@applicationStyle.css">
+                        <TextField fx:id="textFieldSearch" prefHeight="26.0" prefWidth="602.0" promptText="Search..." styleClass="transparent" stylesheets="@applicationStyle.css">
                            <StackPane.margin>
                               <Insets left="30.0" right="30.0" />
                            </StackPane.margin>
