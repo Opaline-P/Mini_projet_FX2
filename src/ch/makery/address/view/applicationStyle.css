@@ -7,12 +7,18 @@
     -secondary: #703867;
     -tertiary: #a07ca9;
     /*-tertiary-armed: #FDDD71;*/
+
+    -fx-background-color: #ffffff;
 }
 
 .transparent{
     -fx-background-color: transparent;
     -fx-text-fill: -secondary;
     -fx-prompt-text-fill: -tertiary;
+}
+
+.transparent-anchorpane{
+    -fx-background-color: transparent;
 }
 
 .highlight-rectangle{
@@ -66,6 +72,19 @@
     -fx-widht-size: -fx-height-size;
 }
 
+.edit-button{
+    -fill: -secondary;
+    -fx-background-color: -fill;
+    -fx-text-fill: -primary;
+    -fx-opacity: 0.9;
+}
+
+.message-label{
+    -fill: -secondary;
+    -fx-background-color: -fill;
+    -fx-text-fill: -primary;
+    -fx-opacity: 0.9;
+}
 
 /*.table-view,
 .table-view .column-header,

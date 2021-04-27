@@ -1,66 +1,68 @@
 package ch.makery.address.view;
 
 import ch.makery.address.MainApp;
-import ch.makery.address.model.Student;
-import ch.makery.address.util.DateUtil;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import ch.makery.address.model.Student;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class EditStudentController implements Initializable {
-    // TODO : controller de EditStudent.fxml
-    // TODO : classe d'édition d'un eleve depuis le bouton "Edit Student"
+/**
+ * Dialog to edit details of a person.
+ *
+ * @author Marco Jakob
+ */
+public class EditStudentController {
 
     @FXML
-    private TextField firstNameTextField, lastNameTextField;
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
+    @FXML
+    private TextField idField;
+    @FXML
+    private TextField promoField;
+    @FXML
+    private TextField specialityField;
+    @FXML
+    private TextField birthyearField;
     @FXML
     private Spinner<Integer> birthYearSpinner;
     @FXML
     private ChoiceBox<String> promotionBox, optionBox;
-    @FXML
-    private ImageView studentImageView;
-    @FXML
-    private Button imageButton, editButton, cancelButton;
 
+    @FXML
+    private Button editButton;
     @FXML
     private Button viewButton;
-
-    private String state = "View";
 
     private int birthYear;
     private final String[] promotion = {"L3","M1","M2"};
     private final String[] option = {"Imaging","Physio","Biotech"};
 
+
     private Stage dialogStage;
-    private Student student;
+    private Student person;
     private boolean okClicked = false;
 
     // Reference to the main application.
     private MainApp mainApp;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
+    @FXML
+    private void initialize() {
         //// Spinner ////
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1950, 2100);
         //valueFactory.setValue(student.getBirthYear());
-
         birthYearSpinner.setValueFactory(valueFactory);
-
         birthYear = birthYearSpinner.getValue();
-
         birthYearSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
@@ -74,41 +76,8 @@ public class EditStudentController implements Initializable {
 
         optionBox.getItems().addAll(option);
         optionBox.setOnAction(this::getOption); // pour mettre OnAction sur la choiceBox
+
     }
-
-    /**
-     * Called when the user clicks the new button. Opens a dialog to edit
-     * details for a new student.
-     */
-    @FXML
-    private void handleNewStudent(ActionEvent e){
-        Student tempStudent = new Student();
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EditStudent.fxml"));
-            Parent root = loader.load();
-
-            // changer de scene
-            Stage stage = new Stage();
-            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-            // relier au controller
-            EditStudentController controller = loader.getController();
-            controller.setDialogStage(stage);
-            controller.setStudent(tempStudent);
-
-            stage.show();
-            /* if (okClicked) {
-                showPersonDetails(selectedStudent);
-            }*/
-        }
-        catch (Exception exception) {
-            System.out.println(exception);
-        }
-    }
-
 
     /**
      * Sets the stage of this dialog.
@@ -119,19 +88,36 @@ public class EditStudentController implements Initializable {
         this.dialogStage = dialogStage;
     }
 
+
     /**
-     * Sets the student to be edited in the dialog.
+     * Is called by the main application to give a reference back to itself.
+     *
+     * @param mainApp
+     */
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
+
+
+    /**
+     * Sets the person to be edited in the dialog.
      *
      * @param student
      */
     public void setStudent(Student student) {
-        this.student = student;
+        this.person = student;
 
-        firstNameTextField.setText(student.getFirstName());
-        lastNameTextField.setText(student.getLastName());
-        promotionBox.setValue(student.getPromotion());
-        if (student.getPromotion().equals("M1") || student.getPromotion().equals("M2")) {
-            optionBox.setValue(student.getOption());
+        idField.setText(Integer.toString(student.getID()));
+        firstNameField.setText(student.getFirstName());
+        lastNameField.setText(student.getLastName());
+
+        /*promoField.setText(student.getPromo());
+        specialityField.setText(student.getSpeciality());
+        birthyearField.setText(Integer.toString(student.getBirthyear()));
+*/
+        promotionBox.setValue(student.getPromo());
+        if (student.getPromo().equals("M1") || student.getPromo().equals("M2")) {
+            optionBox.setValue(student.getSpeciality());
         }
         else {
             optionBox.setDisable(true);
@@ -166,6 +152,7 @@ public class EditStudentController implements Initializable {
     /**
      * Returns true if the user clicked OK, false otherwise.
      *
+     * @return
      */
     public boolean isOkClicked() {
         return okClicked;
@@ -175,16 +162,25 @@ public class EditStudentController implements Initializable {
      * Called when the user clicks ok.
      */
     @FXML
-    private void handleEdit() {
+    private void handleOk() {
         if (isInputValid()) {
-            student.setFirstName(firstNameTextField.getText());
-            student.setLastName(lastNameTextField.getText());
-            student.setBirthYear(birthYearSpinner.getValue());
-            student.setPromotion(promotionBox.getValue());
-            student.setOption(optionBox.getValue());
+            person.setFirstName(firstNameField.getText());
+            person.setLastName(lastNameField.getText());
+            person.setID(Integer.parseInt(idField.getText()));
+            //person.setPromo(promoField.getText());
+            person.setPromo(promotionBox.getValue());
+            //person.setSpeciality(specialityField.getText());
+            person.setSpeciality(optionBox.getValue());
+            //person.setBirthyear(Integer.parseInt(birthyearField.getText()));
+            person.setBirthyear(birthYearSpinner.getValue());
 
             okClicked = true;
-            dialogStage.close();
+            if (mainApp.getState().equals("Add")) {
+                mainApp.getStudentData().add(person); //on ajoute l'étudiant
+                mainApp.setState("View"); //On affiche la page view avec le view disable
+            }
+            mainApp.showStudentOverview(); //On affiche la page View
+            //dialogStage.close();
         }
     }
 
@@ -204,18 +200,46 @@ public class EditStudentController implements Initializable {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (firstNameTextField.getText() == null || firstNameTextField.getText().length() == 0) {
+        if (firstNameField.getText() == null || firstNameField.getText().length() == 0) {
             errorMessage += "No valid first name!\n";
         }
-        if (lastNameTextField.getText() == null || lastNameTextField.getText().length() == 0) {
+        if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
             errorMessage += "No valid last name!\n";
         }
+        if (idField.getText() == null || idField.getText().length() == 0) {
+            errorMessage += "No valid id!\n";
+        }else {
+            // try to parse the postal code into an int.
+            try {
+                Integer.parseInt(idField.getText());
+            } catch (NumberFormatException e) {
+                errorMessage += "No valid id (must be an integer)!\n";
+            }
+        }
+
+        /*if (promoField.getText() == null || promoField.getText().length() == 0) {
+            errorMessage += "No valid promo!\n";
+        }
+
+        if (promoField.getText().equals("M1") || promoField.getText().equals("M2")) {
+            if (specialityField.getText() == null || specialityField.getText().length() == 0) {
+                errorMessage += "No valid speciality!\n";
+            }
+        }
+
+        if (birthyearField.getText() == null || birthyearField.getText().length() == 0) {
+            errorMessage += "No valid birthyear!\n";
+        } *//*else {
+            if (!DateUtil.validDate(birthyearField.getText())) {
+                errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
+            }
+        }*/
+
         if (errorMessage.length() == 0) {
             return true;
-        }
-        else {
+        } else {
             // Show the error message.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
@@ -227,29 +251,29 @@ public class EditStudentController implements Initializable {
         }
     }
 
+
+
     /**
      * Called when the user clicks the edit button. Opens the list of students
      * to chose the one to edit.
      */
     @FXML
-    private void clickViewButton(ActionEvent e) throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/PersonOverview.fxml"));
-            Parent root = loader.load();
+    private void clickEditButton() {
+        //edit Button
+        editButton.setDisable(true);
+        //view Button
+        viewButton.setDisable(false);
+    }
 
-            // changer de scene
-            Stage stage = new Stage();
-            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-            // relier au controller
-            PersonOverviewController controller = loader.getController();
-
-            stage.show();
-        }
-        catch (Exception exception) {
-            System.out.println(exception);
-        }
+    /**
+     * Called when the user clicks the edit button. Opens the list of students
+     * to chose the one to edit.
+     */
+    @FXML
+    private void clickViewButton() {
+        //edit Button
+        editButton.setDisable(false);
+        //view Button
+        viewButton.setDisable(true);
     }
 }

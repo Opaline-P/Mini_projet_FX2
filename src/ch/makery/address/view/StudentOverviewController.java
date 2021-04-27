@@ -1,29 +1,19 @@
 package ch.makery.address.view;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Student;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Predicate;
-import java.util.logging.XMLFormatter;
 
-public class PersonOverviewController {
+public class StudentOverviewController {
     @FXML
-    private TableView<Student> studentTable;
+    private TableView<Student> personTable;
     @FXML
     private FilteredList<Student> filteredData;
     @FXML
@@ -33,18 +23,24 @@ public class PersonOverviewController {
     @FXML
     private TableColumn<Student, String> lastNameColumn;
     @FXML
-    private TableColumn<Student, Number> birthYearColumn;
-    @FXML
     private TableColumn<Student, String> promoColumn;
     @FXML
-    private TableColumn<Student, String> optionColumn;
+    private TableColumn<Student, String> specialityColumn;
+    @FXML
+    private TableColumn<Student, Number> birthyearColumn;
 
     @FXML
     private Label firstNameLabel;
     @FXML
     private Label lastNameLabel;
     @FXML
-    private Label birthYearLabel;
+    private Label streetLabel;
+    @FXML
+    private Label postalCodeLabel;
+    @FXML
+    private Label cityLabel;
+    @FXML
+    private Label birthdayLabel;
     @FXML
     private TextField searchBox;
     @FXML
@@ -57,17 +53,18 @@ public class PersonOverviewController {
     @FXML
     private Button viewButton;
 
-    private String state = "View";
+    //private String state = "View";
+
+
 
     // Reference to the main application.
     private MainApp mainApp;
-
 
     /**
      * The constructor.
      * The constructor is called before the initialize() method.
      */
-    public PersonOverviewController() {
+    public StudentOverviewController() {
     }
 
     /**
@@ -81,9 +78,16 @@ public class PersonOverviewController {
         //idColumn.setCellFactory(col -> new IntegerEditingCell());
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-        birthYearColumn.setCellValueFactory(cellData -> cellData.getValue().birthYearProperty());
-        promoColumn.setCellValueFactory(cellData -> cellData.getValue().promotionProperty());
-        optionColumn.setCellValueFactory(cellData -> cellData.getValue().optionProperty());
+        birthyearColumn.setCellValueFactory(cellData -> cellData.getValue().birthyearProperty());
+        promoColumn.setCellValueFactory(cellData -> cellData.getValue().promoProperty());
+        specialityColumn.setCellValueFactory(cellData -> cellData.getValue().specialityProperty());
+
+
+        // Clear person details.
+        //showPersonDetails(null);
+
+        // Listen for selection changes and show the person details when changed.
+        //personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
 
         //Management of the search box with predicate
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(createPredicate(newValue)));
@@ -95,7 +99,7 @@ public class PersonOverviewController {
     /**
      * Is called by the main application to give a reference back to itself.
      *
-     * @param mainApp MainApp
+     * @param mainApp
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -105,7 +109,13 @@ public class PersonOverviewController {
 
         //Filtered list when we are searching a student
         filteredData = new FilteredList<>(FXCollections.observableList(this.mainApp.getStudentData()));
-        studentTable.setItems(filteredData);
+        personTable.setItems(filteredData);
+
+        if (mainApp.getState()=="Edit") {
+            clickEditButton();
+        }if (mainApp.getState()=="View") {
+            clickViewButton();
+        }
     }
 
     /**
@@ -166,11 +176,10 @@ public class PersonOverviewController {
      */
     @FXML
     private void handleDeletePerson() {
-        int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
+        int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            studentTable.getItems().remove(selectedIndex);
-        }
-        else {
+            personTable.getItems().remove(selectedIndex);
+        } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
@@ -190,42 +199,17 @@ public class PersonOverviewController {
 
     /**
      * Called when the user clicks the new button. Opens a dialog to edit
-     * details for a new student.
+     * details for a new person.
      */
-    // TODO : idem que EditChoose : obliger de faire le chgmt de controller ici
     @FXML
-    private void handleNewStudent(ActionEvent e){
+    private void handleNewPerson() {
         Student tempStudent = new Student();
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EditStudent.fxml"));
-            Parent root = loader.load();
-
-            // changer de scene
-            Stage stage = new Stage();
-            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-            // relier au contoller
-            EditStudentController controller = loader.getController();
-            controller.setDialogStage(stage);
-            controller.setStudent(tempStudent);
-
-            stage.show();
-            /* if (okClicked) {
-                showPersonDetails(selectedStudent);
-            }*/
+        mainApp.setState("Add");
+        boolean okClicked = mainApp.showStudentEditDialog(tempStudent);
+        /*if (okClicked) {
+            mainApp.getStudentData().add(tempStudent);
         }
-        catch (Exception exception) {
-            System.out.println(exception);
-        }
-
-        /*boolean okClicked = mainApp.showEditStudent(tempStudent);
-        if (okClicked) {
-            mainApp.getPersonData().add(tempPerson);
-        }
-        setMainApp(this.mainApp); */
+        setMainApp(this.mainApp);*/
     }
 
     /**
@@ -234,11 +218,12 @@ public class PersonOverviewController {
      */
     @FXML
     private void clickEditButton() {
-        this.state = "Edit";
+        /*//this.state = "Edit";
+        mainApp.setState("Edit");
         //edit Button
         editButton.setDisable(true);
         //view Button
-        viewButton.setDisable(false);
+        viewButton.setDisable(false);*/
         //search Box
         handleClearSearchText();
         searchBox.setPromptText("Which student do you want to edit ?");
@@ -249,46 +234,20 @@ public class PersonOverviewController {
 
     /**
      * Called when the user clicks the person to edit. Opens a dialog to edit
-     * details for the selected student.
+     * details for the selected person.
      */
-    // TODO : idem que EditChoose : obliger de faire le chgmt de controller ici
     @FXML
-    private void handleEditStudent(ActionEvent e) {
-        if (state.equals("Edit")) {
-            Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
+    private void handleEditPerson() {
+        //if (state=="Edit") {
+        if (mainApp.getState()=="Edit") {
+            Student selectedStudent = personTable.getSelectionModel().getSelectedItem();
             if (selectedStudent != null) {
-
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EditStudent.fxml"));
-                    Parent root = loader.load();
-
-                    // changer de scene
-                    Stage editStage = new Stage();
-                    editStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    editStage.setScene(scene);
-
-                    // relier au contoller
-                    EditStudentController controller = loader.getController();
-                    controller.setDialogStage(editStage);
-                    controller.setStudent(selectedStudent);
-
-                    editStage.show();
-                    /* if (okClicked) {
-                        showPersonDetails(selectedStudent);
-                    }*/
-                }
-                catch (Exception exception) {
-                    System.out.println(exception);
+                boolean okClicked = mainApp.showStudentEditDialog(selectedStudent);
+                if (okClicked) {
+                    //showPersonDetails(selectedPerson);
                 }
 
-            /*boolean okClicked = mainApp.showEditStudent(selectedStudent);
-            if (okClicked) {
-                //showPersonDetails(selectedPerson);
-            }*/
-
-            }
-            else {
+            } else {
                 // Nothing selected.
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(mainApp.getPrimaryStage());
@@ -307,11 +266,12 @@ public class PersonOverviewController {
      */
     @FXML
     private void clickViewButton() {
-        this.state = "View";
+       /* //this.state = "View";
+        mainApp.setState("View");
         //edit Button
         editButton.setDisable(false);
         //view Button
-        viewButton.setDisable(true);
+        viewButton.setDisable(true);*/
         //viewButton.setStyle("-fx-background-color: -secondary; -fx-text-fill: -primary");
         //search Box
         handleClearSearchText();

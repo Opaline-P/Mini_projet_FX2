@@ -1,50 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.EditStudentController">
-   <children>
-      <SplitPane dividerPositions="0.15100671140939598" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane prefHeight="38.0" prefWidth="700.0">
-               <children>
-                  <ButtonBar prefHeight="40.0" prefWidth="513.0" AnchorPane.rightAnchor="10.0">
-                    <buttons>
-                      <Button fx:id="viewButton" mnemonicParsing="false" onAction="#clickViewButton" text="View Student List" />
-                        <Button fx:id="addButton" mnemonicParsing="false" text="Add a new student" />
-                        <Button mnemonicParsing="false" text="Edit a student information" />
-                    </buttons>
-                  </ButtonBar>
-               </children>
-            </AnchorPane>
-          <AnchorPane prefHeight="344.0" prefWidth="700.0">
-               <children>
-                  <Label layoutX="167.0" layoutY="30.0" text="First Name" />
-                  <Label layoutX="168.0" layoutY="89.0" text="Last Name" />
-                  <Label layoutX="167.0" layoutY="143.0" text="Birth Year" />
-                  <Label layoutX="168.0" layoutY="203.0" text="Promotion" />
-                  <Label layoutX="168.0" layoutY="262.0" text="Option" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="73.0" prefHeight="94.0" prefWidth="118.0" style="-fx-background-color: #d050e4; -fx-text-fill: #ffffff;" text="You are editing a student information" textAlignment="CENTER" wrapText="true" />
-                  <TextField fx:id="firstNameTextField" layoutX="169.0" layoutY="50.0" />
-                  <TextField fx:id="lastNameTextField" layoutX="170.0" layoutY="108.0" />
-                  <ImageView fx:id="studentImageView" fitHeight="108.0" fitWidth="118.0" layoutX="479.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button fx:id="imageButton" alignment="CENTER" contentDisplay="CENTER" layoutX="491.0" layoutY="148.0" mnemonicParsing="false" text="Edit the image" />
-                  <Button fx:id="editButton" alignment="CENTER" contentDisplay="CENTER" layoutX="531.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleEdit" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #d050e4;" text="EDIT" textFill="WHITE" />
-                  <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="597.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleCancel" text="CANCEL" textFill="#d050e4" />
-                  <Spinner fx:id="birthYearSpinner" layoutX="168.0" layoutY="161.0" />
-                  <ChoiceBox fx:id="promotionBox" layoutX="168.0" layoutY="221.0" prefWidth="150.0" />
-                  <ChoiceBox fx:id="optionBox" layoutX="170.0" layoutY="280.0" prefWidth="150.0" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="background" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.EditStudentController">
+    <children>
+        <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <!--<AnchorPane maxHeight="58.0" minHeight="50.0" minWidth="0.0" prefHeight="55.0" prefWidth="698.0">
+                   <children>
+                      <ButtonBar prefHeight="40.0" prefWidth="513.0" AnchorPane.rightAnchor="10.0">
+                         <buttons>
+                            <Button fx:id="viewButton" mnemonicParsing="false" onAction="#clickViewButton" styleClass="generalbutton" text="View Student List" />
+                            <Button mnemonicParsing="false" text="Add a new student" />
+                            <Button fx:id="editButton" mnemonicParsing="false" onAction="#clickEditButton" text="Edit a student information" />
+                         </buttons>
+                      </ButtonBar>
+                   </children>
+                </AnchorPane>-->
+                <AnchorPane prefHeight="344.0" prefWidth="700.0">
+                    <children>
+                        <Label layoutX="52.0" layoutY="28.0" text="ID" />
+                        <Label layoutX="52.0" layoutY="86.0" text="First Name" />
+                        <Label layoutX="52.0" layoutY="130.0" text="Last Name" />
+                        <Label layoutX="52.0" layoutY="176.0" text="Birth Year" />
+                        <Label layoutX="52.0" layoutY="226.0" text="Promotion" />
+                        <Label layoutX="52.0" layoutY="277.0" text="Option" />
+                        <!--                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="73.0" prefHeight="94.0" prefWidth="118.0" style="-fx-background-color: #d050e4; -fx-text-fill: #ffffff;" text="You are editing a student information" textAlignment="CENTER" wrapText="true" />-->
+                        <TextField fx:id="idField" layoutX="60.0" layoutY="50.0" />
+                        <TextField fx:id="firstNameField" layoutX="60.0" layoutY="104.0" />
+                        <TextField fx:id="lastNameField" layoutX="60.0" layoutY="148.0" />
+                        <ImageView fx:id="studentImageView" fitHeight="108.0" fitWidth="118.0" layoutX="373.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="imageButton" alignment="CENTER" contentDisplay="CENTER" layoutX="386.0" layoutY="148.0" mnemonicParsing="false" text="Edit the image" />
+                        <Button fx:id="editButton2" alignment="CENTER" contentDisplay="CENTER" layoutX="362.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="26.0" prefWidth="60.0" styleClass="edit-button" text="EDIT" textFill="WHITE" />
+                        <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="437.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleCancel" text="CANCEL" textFill="#d050e4" />
+                        <Spinner fx:id="birthYearSpinner" layoutX="60.0" layoutY="195.0" />
+                        <ChoiceBox fx:id="promotionBox" layoutX="59.0" layoutY="244.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="optionBox" layoutX="59.0" layoutY="295.0" prefWidth="150.0" />
+                        <!--<TextField fx:id="birthyearField" layoutX="168.0" layoutY="161.0" />
+                        <TextField fx:id="promoField" layoutX="168.0" layoutY="221.0" />
+                        <TextField fx:id="specialityField" layoutX="170.0" layoutY="280.0" />
+      -->
+                    </children>
+                </AnchorPane>
+
+                <!--<ButtonBar layoutX="378.0" layoutY="336.0" prefHeight="40.0" prefWidth="200.0">
+                  <buttons>
+                      <Button mnemonicParsing="false" onAction="#handleOk" text="Ok" />
+                    <Button mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+                  </buttons>
+                </ButtonBar>-->
+            </items>
+            <effect>
+                <ColorAdjust contrast="0.27" />
+            </effect>
+        </SplitPane>
+        <!--<ToggleButton mnemonicParsing="false" prefHeight="84.0" prefWidth="88.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="2.0" />-->
+    </children>
 </AnchorPane>

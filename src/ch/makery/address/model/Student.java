@@ -6,61 +6,73 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * Model class for a Person.
+ * Model class for a Student.
  *
  * @author Marco Jakob
  */
 public class Student {
-    // TODO : modification de la classe Person en Student (avec refractor donc c'est fait partout)
-    //  et modification des champs pour qu'ils soient en accord avec ce qu'on fait et non avec le tuto de PG ie. un etudiant et non une personne lambda
 
     private final IntegerProperty id;
+    //private final StringProperty id;
     private final StringProperty firstName;
     private final StringProperty lastName;
-    private final IntegerProperty birthYear;
-    private final StringProperty promotion;
-    private final StringProperty option;
+    private final StringProperty promo;
+    private final StringProperty speciality;
+    //private final ObjectProperty<LocalDate> birthday;
+    private final IntegerProperty birthyear;
 
     /**
      * Default constructor.
      */
     public Student() {
-        this(0, null, null, 1950, null, null);
+        this(0, null, null);
     }
 
     /**
      * Constructor with some initial data.
      *
-     * @param id Integer
-     * @param firstName String
-     * @param lastName String
-     * @param birthYear int
-     * @param promotion String
-     * @param option String
+     * @param id
+     * @param firstName
+     * @param lastName
      */
-    public Student(Integer id, String firstName, String lastName, int birthYear, String promotion, String option) {
+    public Student(Integer id, String firstName, String lastName) {
         this.id = new SimpleIntegerProperty(id);
+        //this.id = new SimpleStringProperty(id);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
-        this.birthYear = new SimpleIntegerProperty(birthYear);
-        this.promotion = new SimpleStringProperty(promotion);
-        this.option = new SimpleStringProperty(option);
+
+        // Some initial dummy data, just for convenient testing.
+        this.promo = new SimpleStringProperty("L3");
+        //this.speciality = new SimpleStringProperty("some city");
+        this.speciality = new SimpleStringProperty("");
+        //this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+        this.birthyear = new SimpleIntegerProperty(1999);
     }
 
-    // Student Id ////////////////////
-    public int getID() {
-        return id.get();
+    /**
+     * Constructor with some initial data.
+     *
+     * @param id
+     * @param firstName
+     * @param lastName
+     * @param birthyear
+     * @param promo
+     * @param speciality
+     */
+    public Student(Integer id, String firstName, String lastName, Integer birthyear, String promo, String speciality) {
+        this.id = new SimpleIntegerProperty(id);
+        //this.id = new SimpleStringProperty(id);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+
+        // Some initial dummy data, just for convenient testing.
+        this.promo = new SimpleStringProperty(promo);
+        //this.speciality = new SimpleStringProperty("some city");
+        this.speciality = new SimpleStringProperty(speciality);
+        //this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+        this.birthyear = new SimpleIntegerProperty(birthyear);
     }
 
-    public void setID(int id) {
-        this.id.set(id);
-    }
-
-    public IntegerProperty idProperty() {
-        return id;
-    }
-
-    // Student First Name ////////////////////
     public String getFirstName() {
         return firstName.get();
     }
@@ -73,7 +85,6 @@ public class Student {
         return firstName;
     }
 
-    // Student Last Name ////////////////////
     public String getLastName() {
         return lastName.get();
     }
@@ -86,43 +97,76 @@ public class Student {
         return lastName;
     }
 
-    // Student Birth Year ////////////////////
-    public Integer getBirthYear() {
-        return birthYear.get();
+    public String getPromo() {
+        return promo.get();
     }
 
-    public void setBirthYear(Integer birthYear) {
-        this.birthYear.set(birthYear);
+    public void setPromo(String promo) {
+        this.promo.set(promo);
     }
 
-    public IntegerProperty birthYearProperty() {
-        return birthYear;
+    public StringProperty promoProperty() {
+        return promo;
     }
 
-    // Student's Promotion ////////////////////
-    public String getPromotion() {
-        return promotion.get();
+    public int getID() {
+        return id.get();
     }
 
-    public void setPromotion(String promotion) {
-        this.promotion.set(promotion);
+    /*public String getID() {
+        return id.get();
+    }*/
+
+    public void setID(int id) {
+        this.id.set(id);
     }
 
-    public StringProperty promotionProperty() {
-        return promotion;
+    /*public void setID(String id) {
+        this.id.set(id);
+    }*/
+
+    public IntegerProperty idProperty() {
+        return id;
     }
 
-    // Student's option
-    public String getOption() {
-        return option.get();
+    /*public StringProperty idProperty() {
+        return id;
+    }*/
+
+    public String getSpeciality() {
+        return speciality.get();
     }
 
-    public void setOption(String option) {
-        this.option.set(option);
+    public void setSpeciality(String speciality) {
+        this.speciality.set(speciality);
     }
 
-    public StringProperty optionProperty() {
-        return option;
+    public StringProperty specialityProperty() {
+        return speciality;
     }
 
+    /*public LocalDate getBirthday() {
+        return birthday.get();
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday.set(birthday);
+    }
+
+    public ObjectProperty<LocalDate> birthdayProperty() {
+        return birthday;
+    }*/
+
+
+    public Integer getBirthyear() {
+        return birthyear.get();
+    }
+
+    public void setBirthyear(Integer birthyear) {
+        this.birthyear.set(birthyear);
+    }
+
+    public IntegerProperty birthyearProperty() {
+        return birthyear;
+    }
 }
