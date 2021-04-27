@@ -36,7 +36,7 @@ public class EditStudentController {
     private ChoiceBox<String> promotionBox, optionBox;
 
     @FXML
-    private Button editButton;
+    private Button editOkButton;
     @FXML
     private Button viewButton;
 
@@ -96,6 +96,9 @@ public class EditStudentController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+        if (mainApp.getState().equals("Add")){
+            editOkButton.setText("Add");
+        }
     }
 
 

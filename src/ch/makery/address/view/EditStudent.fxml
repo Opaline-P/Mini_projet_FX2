@@ -39,7 +39,7 @@
                         <TextField fx:id="lastNameField" layoutX="60.0" layoutY="148.0" />
                         <ImageView fx:id="studentImageView" fitHeight="108.0" fitWidth="118.0" layoutX="373.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
                         <Button fx:id="imageButton" alignment="CENTER" contentDisplay="CENTER" layoutX="386.0" layoutY="148.0" mnemonicParsing="false" text="Edit the image" />
-                        <Button fx:id="editButton2" alignment="CENTER" contentDisplay="CENTER" layoutX="362.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="26.0" prefWidth="60.0" styleClass="edit-button" text="EDIT" textFill="WHITE" />
+                        <Button fx:id="editOkButton" alignment="CENTER" contentDisplay="CENTER" layoutX="362.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="26.0" prefWidth="60.0" styleClass="edit-button" text="EDIT" textFill="WHITE" />
                         <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="437.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleCancel" text="CANCEL" textFill="#d050e4" />
                         <Spinner fx:id="birthYearSpinner" layoutX="60.0" layoutY="195.0" />
                         <ChoiceBox fx:id="promotionBox" layoutX="59.0" layoutY="244.0" prefWidth="150.0" />
