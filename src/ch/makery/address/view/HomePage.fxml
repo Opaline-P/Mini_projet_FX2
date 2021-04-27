@@ -6,17 +6,16 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="background" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.HomePageController">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="transparent-anchorpane" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.HomePageController">
    <children>
-      <SplitPane dividerPositions="0.2414658634538153" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" styleClass="transparent-anchorpane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="699.0">
+          <!--<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="699.0">
                <children>
                   <SplitPane prefHeight="93.6" prefWidth="699.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <items>
@@ -31,7 +30,7 @@
                     </buttons>
                   </ButtonBar>
                </children>
-            </AnchorPane>
+            </AnchorPane>-->
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <StackPane fx:id="searchStackPane" layoutX="399.0" layoutY="7.0" prefHeight="30.0" prefWidth="285.0" styleClass="highlight-rectangle" stylesheets="@applicationStyle.css" AnchorPane.leftAnchor="399.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="7.0">

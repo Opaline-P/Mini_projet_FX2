@@ -3,6 +3,7 @@ package ch.makery.address;
 import java.io.IOException;
 
 import ch.makery.address.model.Student;
+import ch.makery.address.view.HomePageController;
 import ch.makery.address.view.RootLayoutController;
 import ch.makery.address.view.EditStudentController;
 import ch.makery.address.view.StudentOverviewController;
@@ -58,7 +59,8 @@ import javafx.stage.Stage;
 
             initRootLayout();
 
-            showStudentOverview();
+            showHomePage();
+            //showStudentOverview();
         }
 
         /**
@@ -88,6 +90,31 @@ import javafx.stage.Stage;
                 e.printStackTrace();
             }
         }
+
+
+        /**
+         * Shows the person overview inside the root layout.
+         */
+        public void showHomePage() {
+            try {
+                // Load person overview.
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource("view/HomePage.fxml"));
+                AnchorPane HomePage = (AnchorPane) loader.load();
+
+                // Set home page into the center of root layout.
+                rootLayout.setCenter(HomePage);
+                rootController.setVisibleMessage(false);
+
+                // Give the controller access to the main app.
+                HomePageController controller = loader.getController();
+                controller.setMainApp(this);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         /**
          * Shows the student overview inside the root layout.
