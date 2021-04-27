@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -62,7 +64,32 @@ import javafx.stage.Stage;
 
             showHomePage();
             //showStudentOverview();
+
+            // to ask a confirmation before exit
+            primaryStage.setOnCloseRequest(event -> {
+                event.consume();
+                logout(primaryStage);
+            });
         }
+
+
+        /**
+         * asked a confirmation before exiting
+         * @param stage Stage
+         */
+        public void logout (Stage stage) {
+            // pop up window before exiting
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Exit");
+            alert.setHeaderText("You're about to exit !");
+            alert.setContentText("Are you sure you want to exit ? "); //All information not saved will be lost.");
+
+            if (alert.showAndWait().get() == ButtonType.OK) { // if user click on OK button
+                System.out.println("You successfully exited !");
+                stage.close();
+            }
+        }
+
 
         /**
          * Initializes the root layout.
