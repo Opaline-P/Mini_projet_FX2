@@ -25,7 +25,7 @@
                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#clickEditButton" text="Edit a student information" />
                     </buttons>
                 </ButtonBar>
-                <ToggleButton mnemonicParsing="false" prefHeight="84.0" prefWidth="88.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="2.0" />
+                <ToggleButton mnemonicParsing="false" onAction="#clickLogoButton" prefHeight="84.0" prefWidth="88.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="2.0" />
             </children>
         </AnchorPane>
     </top>

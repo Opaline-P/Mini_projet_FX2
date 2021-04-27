@@ -135,4 +135,23 @@ public class RootLayoutController {
         searchAnchorPane.setRightAnchor(searchStackPane, 20.0);*/
     }
 
+    /**
+     * Called when the user clicks the logo button. Opens the home page
+     *
+     */
+    @FXML
+    private void clickLogoButton() {
+        //this.state = "View";
+        mainApp.setState("Home");
+        //edit Button
+        editButton.setDisable(false);
+        //view Button
+        viewButton.setDisable(false);
+        //add Button
+        addButton.setDisable(false);
+
+        mainApp.showHomePage();
+
+    }
+
 }
