@@ -59,12 +59,16 @@
                         </Button>
                      </children>
                   </StackPane>
-                  <Text fill="#9c2e9e" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome on Gphy app !" textAlignment="CENTER" wrappingWidth="406.9102849960327" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="100.0">
-                     <font>
-                        <Font name="System Bold Italic" size="26.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#9c2e9e" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="You can view the Gphy student, add a new student or edit a student information" textAlignment="CENTER" wrappingWidth="406.9102849960327" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0" />
+                  <StackPane layoutX="229.0" layoutY="150.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                     <children>
+                        <Text fill="#9c2e9e" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome on Gphy app !" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="406.9102849960327" StackPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold Italic" size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#9c2e9e" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="You can view the Gphy student, add a new student or edit a student information" textAlignment="CENTER" wrappingWidth="406.9102849960327" StackPane.alignment="BOTTOM_CENTER" />
+                     </children>
+                  </StackPane>
                </children>
             </AnchorPane>
         </items>
