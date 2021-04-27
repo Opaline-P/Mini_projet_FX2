@@ -1,51 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="background" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.PersonOverviewController">
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="background" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="126.0" fitWidth="226.0" layoutX="280.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image>
-<!--                <url>../Images/BeHappyBeGphy.png</url>-->
-            </Image>
-         </image>
-      </ImageView>
-      <ButtonBar layoutX="96.0" layoutY="16.0" prefHeight="40.0" prefWidth="590.0">
-        <buttons>
-          <Button mnemonicParsing="false" text="View Student List" />
-            <Button layoutX="135.0" layoutY="15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="168.0" text="Edit a student information" />
-            <Button layoutX="135.0" layoutY="15.0" mnemonicParsing="false" text="Add a new student" />
-        </buttons>
-      </ButtonBar>
-      <ButtonBar layoutX="294.0" layoutY="56.0" prefHeight="40.0" prefWidth="391.0">
-        <buttons>
-            <TextField maxHeight="50.0" maxWidth="210.0" prefHeight="24.0" prefWidth="394.0" />
-          <Button maxWidth="77.0" mnemonicParsing="false" prefHeight="30.0" text="Search" />
-        </buttons>
-      </ButtonBar>
-      <ImageView fitHeight="212.0" fitWidth="250.0" layoutX="237.0" layoutY="63.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image>
-<!--                <url>@../Images/WelcomeOnGphyApp.png</url>-->
-            </Image>
-         </image>
-      </ImageView>
-      <ImageView fitHeight="191.0" fitWidth="196.0" layoutY="-60.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image>
-<!--                <url>@../Images/LogoGphyApp.png</url>-->
-            </Image>
-         </image>
-      </ImageView>
-      <Text fontSmoothingType="LCD" layoutX="149.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You can view the Gphy student,  add a new student or edit a student information" textAlignment="CENTER" wrappingWidth="422.84149169921875">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
+      <SplitPane dividerPositions="0.2414658634538153" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="699.0">
+               <children>
+                  <SplitPane prefHeight="93.6" prefWidth="699.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <items>
+                        <ToggleButton maxWidth="84.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="84.0" styleClass="background" stylesheets="@applicationStyle.css" text="ToggleButton" />
+                     </items>
+                  </SplitPane>
+                  <ButtonBar layoutX="-31.0" prefHeight="94.0" prefWidth="730.0" stylesheets="@applicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-31.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                    <buttons>
+                        <Button mnemonicParsing="false" prefHeight="28.0" text="View Student List" />
+                        <Button mnemonicParsing="false" prefHeight="28.0" text="Add a new student" />
+                        <Button mnemonicParsing="false" prefHeight="28.0" text="Edit a student information" />
+                    </buttons>
+                  </ButtonBar>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <StackPane fx:id="searchStackPane" layoutX="399.0" layoutY="7.0" prefHeight="30.0" prefWidth="285.0" styleClass="highlight-rectangle" stylesheets="@applicationStyle.css" AnchorPane.leftAnchor="399.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="7.0">
+                     <children>
+                        <Button maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" stylesheets="@applicationStyle.css" text="Search" StackPane.alignment="CENTER_LEFT">
+                           <styleClass>
+                              <String fx:value="search-button" />
+                              <String fx:value="button1" />
+                           </styleClass>
+                           <StackPane.margin>
+                              <Insets left="10.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <TextField prefHeight="26.0" prefWidth="602.0" promptText="Search..." styleClass="transparent" stylesheets="@applicationStyle.css">
+                           <StackPane.margin>
+                              <Insets left="30.0" right="30.0" />
+                           </StackPane.margin>
+                        </TextField>
+                        <Button mnemonicParsing="false" stylesheets="@applicationStyle.css" text="Button" StackPane.alignment="CENTER_RIGHT">
+                           <styleClass>
+                              <String fx:value="delete-button" />
+                              <String fx:value="button1" />
+                           </styleClass>
+                           <StackPane.margin>
+                              <Insets left="650.0" right="10.0" />
+                           </StackPane.margin>
+                        </Button>
+                     </children>
+                  </StackPane>
+                  <ButtonBar buttonMinWidth="0.0" layoutX="-143.0" layoutY="126.0" prefHeight="88.0" prefWidth="521.0" AnchorPane.bottomAnchor="186.0" AnchorPane.leftAnchor="-143.0" AnchorPane.rightAnchor="322.0" AnchorPane.topAnchor="126.0" />
+                  <Text fill="#9c2e9e" layoutX="95.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome on Gphy app !" textAlignment="CENTER" wrappingWidth="406.9102849960327">
+                     <font>
+                        <Font name="System Bold Italic" size="26.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#9c2e9e" layoutX="95.0" layoutY="164.0" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="You can view the Gphy student, add a new student or edit a student information" textAlignment="CENTER" wrappingWidth="406.9102849960327" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </AnchorPane>
