@@ -74,12 +74,13 @@ public class RootLayoutController {
     private void handleNewPerson() {
         Student tempStudent = new Student();
         mainApp.setState("Add");
-        //edit Button
+        /*//edit Button
         editButton.setDisable(false);
         //view Button
         viewButton.setDisable(false);
         //add Button
-        addButton.setDisable(true);
+        addButton.setDisable(true);*/
+        setDisabledButton();
         boolean okClicked = mainApp.showStudentEditDialog(tempStudent);
         /*if (okClicked) {
             mainApp.getStudentData().add(tempStudent);
@@ -96,13 +97,14 @@ public class RootLayoutController {
     private void clickEditButton() {
         //this.state = "Edit";
         mainApp.setState("Edit");
-        //edit Button
+        /*//edit Button
         editButton.setDisable(true);
         //view Button
         viewButton.setDisable(false);
         //add Button
-        addButton.setDisable(false);
+        addButton.setDisable(false);*/
 
+        setDisabledButton();
         mainApp.showStudentOverview();
         //search Box
         /*handleClearSearchText();
@@ -119,13 +121,14 @@ public class RootLayoutController {
     private void clickViewButton() {
         //this.state = "View";
         mainApp.setState("View");
-        //edit Button
+        /*//edit Button
         editButton.setDisable(false);
         //view Button
         viewButton.setDisable(true);
         //add Button
-        addButton.setDisable(false);
+        addButton.setDisable(false);*/
 
+        setDisabledButton();
         mainApp.showStudentOverview();
         //viewButton.setStyle("-fx-background-color: -secondary; -fx-text-fill: -primary");
         /*//search Box
@@ -143,15 +146,55 @@ public class RootLayoutController {
     private void clickLogoButton() {
         //this.state = "View";
         mainApp.setState("Home");
-        //edit Button
+        /*//edit Button
         editButton.setDisable(false);
         //view Button
         viewButton.setDisable(false);
         //add Button
-        addButton.setDisable(false);
-
+        addButton.setDisable(false);*/
+        setDisabledButton();
         mainApp.showHomePage();
 
+    }
+
+    /**
+     * Called when the user clicks a button. Disable false or true
+     *
+     */
+    @FXML
+    public void setDisabledButton(){
+        if (mainApp.getState().equals("Home")){
+            //edit Button
+            editButton.setDisable(false);
+            //view Button
+            viewButton.setDisable(false);
+            //add Button
+            addButton.setDisable(false);
+
+        }if (mainApp.getState().equals("View")){
+            //edit Button
+            editButton.setDisable(false);
+            //view Button
+            viewButton.setDisable(true);
+            //add Button
+            addButton.setDisable(false);
+
+        }if (mainApp.getState().equals("Edit")){
+            //edit Button
+            editButton.setDisable(true);
+            //view Button
+            viewButton.setDisable(false);
+            //add Button
+            addButton.setDisable(false);
+
+        }if (mainApp.getState().equals("Add")){
+            //edit Button
+            editButton.setDisable(false);
+            //view Button
+            viewButton.setDisable(false);
+            //add Button
+            addButton.setDisable(true);
+        }
     }
 
 }

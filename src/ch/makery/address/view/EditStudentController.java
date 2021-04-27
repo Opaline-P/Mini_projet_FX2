@@ -170,12 +170,16 @@ public class EditStudentController {
             //person.setPromo(promoField.getText());
             person.setPromo(promotionBox.getValue());
             //person.setSpeciality(specialityField.getText());
-            person.setSpeciality(optionBox.getValue());
+            if (promotionBox.getValue().equals("L3")){
+                person.setSpeciality(null);
+            }else{
+                person.setSpeciality(optionBox.getValue());
+            }
             //person.setBirthyear(Integer.parseInt(birthyearField.getText()));
             person.setBirthyear(birthYearSpinner.getValue());
 
             okClicked = true;
-            if (mainApp.getState().equals("Add")) {
+            if (mainApp.getState()=="Add") {
                 mainApp.getStudentData().add(person); //on ajoute l'étudiant
                 mainApp.setState("View"); //On affiche la page view avec le view disable
             }
@@ -189,7 +193,10 @@ public class EditStudentController {
      */
     @FXML
     private void handleCancel() {
-        dialogStage.close();
+        if (mainApp.getState()=="Add") {
+            mainApp.setState("View"); //On affiche la page view avec le view disable
+        }
+        mainApp.showStudentOverview();
     }
 
     /**
@@ -219,14 +226,14 @@ public class EditStudentController {
 
         /*if (promoField.getText() == null || promoField.getText().length() == 0) {
             errorMessage += "No valid promo!\n";
-        }
+        }*/
 
-        if (promoField.getText().equals("M1") || promoField.getText().equals("M2")) {
-            if (specialityField.getText() == null || specialityField.getText().length() == 0) {
+        if (promotionBox.getValue().equals("M1") || promotionBox.getValue().equals("M2")) {
+            if (optionBox.getValue() == null || optionBox.getValue().length() == 0) {
                 errorMessage += "No valid speciality!\n";
             }
         }
-
+        /*
         if (birthyearField.getText() == null || birthyearField.getText().length() == 0) {
             errorMessage += "No valid birthyear!\n";
         } *//*else {
@@ -256,24 +263,24 @@ public class EditStudentController {
     /**
      * Called when the user clicks the edit button. Opens the list of students
      * to chose the one to edit.
-     */
+     *//*
     @FXML
     private void clickEditButton() {
         //edit Button
         editButton.setDisable(true);
         //view Button
         viewButton.setDisable(false);
-    }
+    }*/
 
     /**
      * Called when the user clicks the edit button. Opens the list of students
      * to chose the one to edit.
-     */
+     *//*
     @FXML
     private void clickViewButton() {
         //edit Button
         editButton.setDisable(false);
         //view Button
         viewButton.setDisable(true);
-    }
+    }*/
 }

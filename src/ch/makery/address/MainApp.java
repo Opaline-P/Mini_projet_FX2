@@ -57,6 +57,7 @@ import javafx.stage.Stage;
             this.primaryStage = primaryStage;
             this.primaryStage.setTitle("GPhyApp");
 
+            this.state = "Home";
             initRootLayout();
 
             showHomePage();
@@ -105,6 +106,7 @@ import javafx.stage.Stage;
                 // Set home page into the center of root layout.
                 rootLayout.setCenter(HomePage);
                 rootController.setVisibleMessage(false);
+                rootController.setDisabledButton();
 
                 // Give the controller access to the main app.
                 HomePageController controller = loader.getController();
@@ -129,6 +131,7 @@ import javafx.stage.Stage;
                 // Set student overview into the center of root layout.
                 rootLayout.setCenter(studentOverview);
                 rootController.setVisibleMessage(false);
+                rootController.setDisabledButton();
 
                 // Give the controller access to the main app.
                 StudentOverviewController controller = loader.getController();
@@ -166,6 +169,7 @@ import javafx.stage.Stage;
                 // Set student overview into the center of root layout.
                 rootLayout.setCenter(page);
                 rootController.setVisibleMessage(true);
+                rootController.setDisabledButton();
 
                 // Set the student into the controller.
                 EditStudentController controller = loader.getController();
