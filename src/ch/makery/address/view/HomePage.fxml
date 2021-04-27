@@ -11,24 +11,24 @@
 <AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="transparent-anchorpane" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.HomePageController">
    <children>
       <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" styleClass="transparent-anchorpane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <!--<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="699.0">
-               <children>
-                  <SplitPane prefHeight="93.6" prefWidth="699.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <items>
-                        <ToggleButton maxWidth="84.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="84.0" styleClass="background" stylesheets="@applicationStyle.css" text="ToggleButton" />
-                     </items>
-                  </SplitPane>
-                  <ButtonBar layoutX="-31.0" prefHeight="94.0" prefWidth="730.0" stylesheets="@applicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-31.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
-                    <buttons>
-                        <Button fx:id="ButtonViewList" mnemonicParsing="false" prefHeight="28.0" text="View Student List" />
-                        <Button fx:id="ButtonAddStudent" mnemonicParsing="false" prefHeight="28.0" text="Add a new student" />
-                        <Button fx:id="ButtonEditStudent" mnemonicParsing="false" prefHeight="28.0" text="Edit a student information" />
-                    </buttons>
-                  </ButtonBar>
-               </children>
-            </AnchorPane>-->
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <items>
+            <!--<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="699.0">
+                 <children>
+                    <SplitPane prefHeight="93.6" prefWidth="699.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                       <items>
+                          <ToggleButton maxWidth="84.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="84.0" styleClass="background" stylesheets="@applicationStyle.css" text="ToggleButton" />
+                       </items>
+                    </SplitPane>
+                    <ButtonBar layoutX="-31.0" prefHeight="94.0" prefWidth="730.0" stylesheets="@applicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-31.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                      <buttons>
+                          <Button fx:id="ButtonViewList" mnemonicParsing="false" prefHeight="28.0" text="View Student List" />
+                          <Button fx:id="ButtonAddStudent" mnemonicParsing="false" prefHeight="28.0" text="Add a new student" />
+                          <Button fx:id="ButtonEditStudent" mnemonicParsing="false" prefHeight="28.0" text="Edit a student information" />
+                      </buttons>
+                    </ButtonBar>
+                 </children>
+              </AnchorPane>-->
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <StackPane layoutX="-14.0" prefHeight="398.0" prefWidth="698.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -50,7 +50,7 @@
                   </StackPane>
                </children>
             </AnchorPane>
-        </items>
+         </items>
       </SplitPane>
    </children>
 </AnchorPane>
