@@ -37,8 +37,8 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                        <Button fx:id="deleteOkButton" layoutX="437.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="26.0" prefWidth="60.0" text="Delete" textFill="#d050e4" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="202.20000000000005" />
-                        <Button fx:id="editOkButton" layoutX="514.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleEditPerson" prefHeight="26.0" prefWidth="60.0" text="Edit" textFill="#d050e4" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="125.20000000000005" />
+                        <Button fx:id="deleteOkButton" layoutX="437.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleDeleteStudent" prefHeight="26.0" prefWidth="60.0" text="Delete" textFill="#d050e4" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="202.20000000000005" />
+                        <Button fx:id="editOkButton" layoutX="514.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleEditStudent" prefHeight="26.0" prefWidth="60.0" text="Edit" textFill="#d050e4" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="125.20000000000005" />
                         <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="589.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="26.0" prefWidth="60.0" styleClass="edit-button" text="CANCEL" textFill="#d050e4" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="50.200000000000045" />
                   <Label fx:id="specialityLabel" layoutX="185.0" layoutY="282.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
                   <Label fx:id="birthdayLabel" layoutX="185.0" layoutY="196.0" prefHeight="25.0" prefWidth="149.0" text="Label" />

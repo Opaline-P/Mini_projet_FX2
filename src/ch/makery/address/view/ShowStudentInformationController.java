@@ -128,13 +128,13 @@ public class ShowStudentInformationController {
      * Called when the user clicks on the delete button.
      */
     @FXML
-    private void handleDeletePerson() {
+    private void handleDeleteStudent() {
         this.studentData.remove(this.student);
         mainApp.showStudentOverview(); //On affiche la page View
     }
 
     @FXML
-    private void handleEditPerson() {
+    private void handleEditStudent() {
         mainApp.setState("Edit");
         mainApp.showStudentEditDialog(this.student);
     }
