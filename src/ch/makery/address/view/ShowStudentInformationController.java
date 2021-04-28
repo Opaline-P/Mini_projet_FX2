@@ -3,6 +3,7 @@ package ch.makery.address.view;
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Student;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 public class ShowStudentInformationController {
     @FXML
     private TableView<Student> studentTable;
+    private ObservableList<Student> studentData = FXCollections.observableArrayList();
     @FXML
     private Label firstNameLabel;
     @FXML
@@ -40,8 +42,7 @@ public class ShowStudentInformationController {
      * after the fxml file has been loaded.
      */
     @FXML
-    private void initialize() {
-    }
+    private void initialize() { }
 
     /**
      * Sets the stage of this dialog.
@@ -99,12 +100,13 @@ public class ShowStudentInformationController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        studentTable.setItems(mainApp.getStudentData());
+        this.studentData = mainApp.getStudentData();
+        //studentTable.setItems(mainApp.getStudentData());
     }
 
     /**
      * Called when the user clicks on the delete button.
-     */
+     *//*
     @FXML
     private void handleDeletePerson() {
         int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
@@ -120,6 +122,15 @@ public class ShowStudentInformationController {
 
             alert.showAndWait();
         }
+    }*/
+
+    /**
+     * Called when the user clicks on the delete button.
+     */
+    @FXML
+    private void handleDeletePerson() {
+        this.studentData.remove(this.student);
+        mainApp.showStudentOverview(); //On affiche la page View
     }
 
     @FXML
