@@ -2,19 +2,15 @@ package ch.makery.address.view;
 
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Student;
-import ch.makery.address.util.DateUtil;
-import javafx.beans.property.IntegerProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ShowStudentInformationController {
     @FXML
-    private TableView<Student> personTable;
+    private TableView<Student> studentTable;
     @FXML
     private Label firstNameLabel;
     @FXML
@@ -26,9 +22,13 @@ public class ShowStudentInformationController {
     @FXML
     private Label specialityLabel;
     @FXML
+    private Label optionLabel;
+    @FXML
     private Label birthdayLabel;
+    @FXML
+    private FilteredList<Student> filteredData;
 
-    private Student person;
+    private Student student;
 
 
     // Reference to the main application.
@@ -41,7 +41,6 @@ public class ShowStudentInformationController {
      */
     @FXML
     private void initialize() {
-
     }
 
     /**
@@ -77,23 +76,20 @@ public class ShowStudentInformationController {
     }*/
 
     public void getStudent (Student student) {
-        this.person = student;
+        this.student = student;
 
         idLabel.setText(Integer.toString(student.getID()));
         firstNameLabel.setText(student.getFirstName());
         lastNameLabel.setText(student.getLastName());
         birthdayLabel.setText(Integer.toString(student.getBirthyear()));
 
-        /*promoField.setText(student.getPromo());
-        specialityField.setText(student.getSpeciality());
-        birthyearField.setText(Integer.toString(student.getBirthyear()));
-*/
         promoLabel.setText(student.getPromo());
         if (student.getPromo().equals("M1") || student.getPromo().equals("M2")) {
             specialityLabel.setText(student.getSpeciality());
         }
         else {
             specialityLabel.setText(null);
+            optionLabel.setVisible(false);
         }
     }
     /**
@@ -103,6 +99,7 @@ public class ShowStudentInformationController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+        studentTable.setItems(mainApp.getStudentData());
     }
 
     /**
@@ -110,17 +107,25 @@ public class ShowStudentInformationController {
      */
     @FXML
     private void handleDeletePerson() {
-        if (mainApp.getState()=="View") {
-            Student selectedStudent = personTable.getSelectionModel().getSelectedItem();
-            personTable.getItems().remove(selectedStudent);
+        int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            studentTable.getItems().remove(selectedIndex);
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Person Selected");
+            alert.setContentText("Please select a person in the table.");
+
+            alert.showAndWait();
         }
     }
 
-
+    @FXML
     private void handleEditPerson() {
-        if (mainApp.getState() == "View") {
-            Student selectedStudent = personTable.getSelectionModel().getSelectedItem();
-        }
+        mainApp.setState("Edit");
+        mainApp.showStudentEditDialog(this.student);
     }
 
     /**

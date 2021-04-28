@@ -13,7 +13,7 @@ import java.util.function.Predicate;
 
 public class StudentOverviewController {
     @FXML
-    private TableView<Student> personTable;
+    private TableView<Student> studentTable;
     @FXML
     private FilteredList<Student> filteredData;
     @FXML
@@ -28,49 +28,17 @@ public class StudentOverviewController {
     private TableColumn<Student, String> specialityColumn;
     @FXML
     private TableColumn<Student, Number> birthyearColumn;
-
-    @FXML
-    private Label firstNameLabel;
-    @FXML
-    private Label lastNameLabel;
-    @FXML
-    private Label streetLabel;
-    @FXML
-    private Label postalCodeLabel;
-    @FXML
-    private Label cityLabel;
-    @FXML
-    private Label birthdayLabel;
     @FXML
     private TextField searchBox;
     @FXML
     private StackPane searchStackPane;
     @FXML
     private AnchorPane searchAnchorPane;
-
     @FXML
     private Button editButton;
     @FXML
     private Button viewButton;
 
-    /////////////
-    @FXML
-    private TextField firstNameField;
-    @FXML
-    private TextField lastNameField;
-    @FXML
-    private TextField idField;
-    @FXML
-    private TextField promoField;
-    @FXML
-    private TextField specialityField;
-    @FXML
-    private TextField birthyearField;
-    @FXML
-    private Spinner<Integer> birthYearSpinner;
-    @FXML
-    private ChoiceBox<String> promotionBox, optionBox;
-    
     // Reference to the main application.
     private MainApp mainApp;
 
@@ -109,7 +77,7 @@ public class StudentOverviewController {
 
         //Filtered list when we are searching a student
         filteredData = new FilteredList<>(FXCollections.observableList(this.mainApp.getStudentData()));
-        personTable.setItems(filteredData);
+        studentTable.setItems(filteredData);
 
         if (mainApp.getState()=="Edit") {
             clickEditButton();
@@ -180,7 +148,7 @@ public class StudentOverviewController {
     @FXML
     private void handleEditPerson() {
         if (mainApp.getState()=="Edit") {
-            Student selectedStudent = personTable.getSelectionModel().getSelectedItem();
+            Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
             if (selectedStudent != null) {
                 boolean okClicked = mainApp.showStudentEditDialog(selectedStudent);
             }
@@ -195,8 +163,9 @@ public class StudentOverviewController {
                 alert.showAndWait();
             }
         }else if (mainApp.getState()=="View") {
-            Student selectedStudent = personTable.getSelectionModel().getSelectedItem();
+            Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
             if (selectedStudent != null) {
+                mainApp.setState("Show");
                 mainApp.showPersonDialog(selectedStudent);
             } else {
                 // Nothing selected.

@@ -43,7 +43,7 @@
                                     </StackPane.margin>
                                 </Button>
                             </children></StackPane>
-                        <TableView fx:id="personTable" layoutY="27.0" onMouseClicked="#handleEditPerson" onTouchPressed="#handleEditPerson" prefHeight="308.0" prefWidth="698.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
+                        <TableView fx:id="studentTable" layoutY="27.0" onMouseClicked="#handleEditPerson" onTouchPressed="#handleEditPerson" prefHeight="308.0" prefWidth="698.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
                             <columns>
                                 <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
                                 <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />

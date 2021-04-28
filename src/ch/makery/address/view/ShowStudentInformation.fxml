@@ -4,32 +4,48 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="background" stylesheets="@applicationStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.ShowStudentInformationController">
     <children>
         <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <AnchorPane prefHeight="398.0" prefWidth="631.0">
+                <AnchorPane prefHeight="400.0" prefWidth="700.0">
                     <children>
-                        <Label layoutX="52.0" layoutY="28.0" text="ID" />
-                        <Label layoutX="52.0" layoutY="86.0" text="First Name" />
-                        <Label layoutX="52.0" layoutY="130.0" text="Last Name" />
-                        <Label layoutX="52.0" layoutY="176.0" text="Birth Year" />
-                        <Label layoutX="52.0" layoutY="226.0" text="Promotion" />
-                        <Label layoutX="52.0" layoutY="277.0" text="Option" />
-                        <ImageView fx:id="studentImageView" fitHeight="108.0" fitWidth="118.0" layoutX="432.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button fx:id="imageButton" alignment="CENTER" contentDisplay="CENTER" layoutX="446.0" layoutY="148.0" mnemonicParsing="false" text="Student image" />
-                        <Button fx:id="deleteOkButton" layoutX="386.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="26.0" prefWidth="60.0" text="Delete" textFill="#d050e4" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="252.0" />
-                        <Button fx:id="editOkButton" layoutX="461.0" layoutY="324.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Edit" textFill="#d050e4" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="175.0" />
-                        <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="437.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="26.0" prefWidth="60.0" styleClass="edit-button" text="CANCEL" textFill="#d050e4" AnchorPane.bottomAnchor="49.0" AnchorPane.rightAnchor="100.0" />
-                  <Label fx:id="specialityLabel" layoutX="60.0" layoutY="294.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
-                  <Label fx:id="birthdayLabel" layoutX="60.0" layoutY="193.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
-                  <Label fx:id="lastNameLabel" layoutX="60.0" layoutY="148.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
-                  <Label fx:id="firstNameLabel" layoutX="60.0" layoutY="103.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
-                  <Label fx:id="idLabel" layoutX="60.0" layoutY="46.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
-                  <Label fx:id="promoLabel" layoutX="60.0" layoutY="243.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
+                        <Label layoutX="177.0" layoutY="45.0" text="ID">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <Label layoutX="177.0" layoutY="89.0" text="First Name">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <Label layoutX="177.0" layoutY="133.0" text="Last Name">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <Label layoutX="177.0" layoutY="179.0" text="Birth Year">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <Label layoutX="177.0" layoutY="222.0" text="Promotion">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <Label fx:id="optionLabel" layoutX="177.0" layoutY="265.0" text="Option">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <Button fx:id="deleteOkButton" layoutX="437.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="26.0" prefWidth="60.0" text="Delete" textFill="#d050e4" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="202.20000000000005" />
+                        <Button fx:id="editOkButton" layoutX="514.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleEditPerson" prefHeight="26.0" prefWidth="60.0" text="Edit" textFill="#d050e4" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="125.20000000000005" />
+                        <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="589.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="26.0" prefWidth="60.0" styleClass="edit-button" text="CANCEL" textFill="#d050e4" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="50.200000000000045" />
+                  <Label fx:id="specialityLabel" layoutX="185.0" layoutY="282.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
+                  <Label fx:id="birthdayLabel" layoutX="185.0" layoutY="196.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
+                  <Label fx:id="lastNameLabel" layoutX="185.0" layoutY="151.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
+                  <Label fx:id="firstNameLabel" layoutX="185.0" layoutY="106.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
+                  <Label fx:id="idLabel" layoutX="185.0" layoutY="63.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
+                  <Label fx:id="promoLabel" layoutX="185.0" layoutY="239.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
                     </children>
                 </AnchorPane>
             </items>

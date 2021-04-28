@@ -157,7 +157,7 @@ public class EditStudentController {
      */
     @FXML
     private void handleOk() {
-        confirm(dialogStage);
+
         if (isInputValid()) {
             person.setFirstName(firstNameField.getText());
             person.setLastName(lastNameField.getText());
@@ -170,7 +170,7 @@ public class EditStudentController {
                 person.setSpeciality(optionBox.getValue());
             }
             person.setBirthyear(birthYearSpinner.getValue());
-
+            confirm(dialogStage);
             okClicked = true;
             if (mainApp.getState().equals("Add")) {
                 mainApp.getStudentData().add(person); //on ajoute l'étudiant
