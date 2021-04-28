@@ -55,12 +55,17 @@ public class RootLayoutController {
      */
     public void setVisibleMessage(Boolean bool){
         messageLabel.setVisible(bool);
+        editButton.setVisible(true);
+
         if (mainApp.getState()=="Edit") {
             leftBorderAnchor.setPrefWidth(93);
             messageLabel.setText("You are editing a student information");
         }if (mainApp.getState()=="Add") {
             leftBorderAnchor.setPrefWidth(93);
             messageLabel.setText("You are adding a new student");
+        }if (mainApp.getState()=="Show") {
+            leftBorderAnchor.setPrefWidth(93);
+            messageLabel.setText("You are viewing a student information");
         }if (bool.equals(false)){
             leftBorderAnchor.setPrefWidth(7);
         }
@@ -114,8 +119,8 @@ public class RootLayoutController {
     }
 
     /**
-     * Called when the user clicks the edit button. Opens the list of students
-     * to chose the one to edit.
+     * Called when the user clicks the view button. Opens the list of students
+     * to chose the one to view.
      */
     @FXML
     private void clickViewButton() {

@@ -53,6 +53,24 @@ public class StudentOverviewController {
     @FXML
     private Button viewButton;
 
+    /////////////
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
+    @FXML
+    private TextField idField;
+    @FXML
+    private TextField promoField;
+    @FXML
+    private TextField specialityField;
+    @FXML
+    private TextField birthyearField;
+    @FXML
+    private Spinner<Integer> birthYearSpinner;
+    @FXML
+    private ChoiceBox<String> promotionBox, optionBox;
+
     //private String state = "View";
 
 
@@ -87,7 +105,7 @@ public class StudentOverviewController {
         //showPersonDetails(null);
 
         // Listen for selection changes and show the person details when changed.
-        //personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
+        // personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
 
         //Management of the search box with predicate
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(createPredicate(newValue)));
@@ -144,53 +162,6 @@ public class StudentOverviewController {
     }
 
 
-    /**
-     * Fills all text fields to show details about the person.
-     * If the specified person is null, all text fields are cleared.
-     *
-     * @param person the person or null
-     */
-    /*private void showPersonDetails(Person person) {
-        if (person != null) {
-            // Fill the labels with info from the person object.
-            firstNameLabel.setText(person.getFirstName());
-            lastNameLabel.setText(person.getLastName());
-            streetLabel.setText(person.getStreet());
-            //postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
-            cityLabel.setText(person.getCity());
-
-            birthdayLabel.setText(DateUtil.format(person.getBirthday()));
-        } else {
-            // Person is null, remove all the text.
-            firstNameLabel.setText("");
-            lastNameLabel.setText("");
-            streetLabel.setText("");
-            postalCodeLabel.setText("");
-            cityLabel.setText("");
-            birthdayLabel.setText("");
-        }
-    }*/
-
-    /**
-     * Called when the user clicks on the delete button.
-     */
-    @FXML
-    private void handleDeletePerson() {
-        int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-            personTable.getItems().remove(selectedIndex);
-        } else {
-            // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
-
-            alert.showAndWait();
-        }
-    }
-
     public void handleClearSearchText() {
         searchBox.setText("");
         //event.consume();
@@ -198,8 +169,8 @@ public class StudentOverviewController {
 
 
     /**
-     * Called when the user clicks the new button. Opens a dialog to edit
-     * details for a new person.
+     * Called when the user clicks the new button.
+     * Opens a dialog to add details for a new person.
      */
     @FXML
     private void handleNewPerson() {
@@ -211,6 +182,7 @@ public class StudentOverviewController {
         }
         setMainApp(this.mainApp);*/
     }
+
 
     /**
      * Called when the user clicks the edit button. Opens the list of students
@@ -231,9 +203,8 @@ public class StudentOverviewController {
         searchAnchorPane.setRightAnchor(searchStackPane, 100.0);
     }
 
-
     /**
-     * Called when the user clicks the person to edit. Opens a dialog to edit
+     * Called when the user clicks the person to edit or to show. Opens a dialog to edit
      * details for the selected person.
      */
     @FXML
@@ -257,8 +228,23 @@ public class StudentOverviewController {
 
                 alert.showAndWait();
             }
+        }else if (mainApp.getState()=="View") {
+            Student selectedStudent = personTable.getSelectionModel().getSelectedItem();
+            if (selectedStudent != null) {
+                mainApp.showPersonDialog(selectedStudent);
+            } else {
+                // Nothing selected.
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(mainApp.getPrimaryStage());
+                alert.setTitle("No Selection");
+                alert.setHeaderText("No Person Selected");
+                alert.setContentText("Please select a person in the table.");
+
+                alert.showAndWait();
+            }
         }
     }
+
 
     /**
      * Called when the user clicks the edit button. Opens the list of students
@@ -266,14 +252,6 @@ public class StudentOverviewController {
      */
     @FXML
     private void clickViewButton() {
-       /* //this.state = "View";
-        mainApp.setState("View");
-        //edit Button
-        editButton.setDisable(false);
-        //view Button
-        viewButton.setDisable(true);*/
-        //viewButton.setStyle("-fx-background-color: -secondary; -fx-text-fill: -primary");
-        //search Box
         handleClearSearchText();
         searchBox.setPromptText("Search...");
         searchAnchorPane.setLeftAnchor(searchStackPane, 400.0);

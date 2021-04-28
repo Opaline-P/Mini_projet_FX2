@@ -3,10 +3,7 @@ package ch.makery.address;
 import java.io.IOException;
 
 import ch.makery.address.model.Student;
-import ch.makery.address.view.HomePageController;
-import ch.makery.address.view.RootLayoutController;
-import ch.makery.address.view.EditStudentController;
-import ch.makery.address.view.StudentOverviewController;
+import ch.makery.address.view.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
     public class MainApp extends Application {
@@ -211,6 +209,36 @@ import javafx.stage.Stage;
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
+            }
+        }
+
+        /**
+         * Opens a dialog to edit details for the specified person. If the user
+         * clicks OK, the changes are saved into the provided person object and true
+         * is returned.
+         *
+         * @param student the person object to be edited
+         * @return true if the user clicked OK, false otherwise.
+         */
+        public void showPersonDialog(Student student) {
+            try {
+                // Load the fxml file and create a new stage for the popup dialog.
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(ch.makery.address.MainApp.class.getResource("view/ShowStudentInformation.fxml"));
+                AnchorPane showStudent = (AnchorPane) loader.load();
+
+                // Set student overview into the center of root layout.
+                rootLayout.setCenter(showStudent);
+                rootController.setVisibleMessage(true);
+                rootController.setDisabledButton();
+
+                // Set the student into the controller.
+                ShowStudentInformationController controller = loader.getController();
+                controller.getStudent(student);
+                controller.setMainApp(this);
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
