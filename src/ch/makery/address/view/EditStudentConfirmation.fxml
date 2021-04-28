@@ -15,9 +15,9 @@
                <children>
                   <ButtonBar prefHeight="40.0" prefWidth="513.0" AnchorPane.rightAnchor="10.0">
                     <buttons>
-                        <Button mnemonicParsing="false" onAction="#handleShowPerson" text="View Student List" />
-                        <Button mnemonicParsing="false" onAction="#handleNewPerson" text="Add a new student" />
-                        <Button mnemonicParsing="false" onAction="#handleEditPerson" text="Edit a student information" />
+                        <Button mnemonicParsing="false" onAction="#handleShowStudent" text="View Student List" />
+                        <Button mnemonicParsing="false" onAction="#handleNewStudent" text="Add a new student" />
+                        <Button mnemonicParsing="false" onAction="#handleEditStudent" text="Edit a student information" />
                     </buttons>
                   </ButtonBar>
                </children>

@@ -54,7 +54,7 @@ public class ShowStudentInformationController {
     }
     
     /**
-     * Fills all text fields to show details about the person.
+     * Fills all text fields to show details about the student.
      *
      * @param student the student or null
      */

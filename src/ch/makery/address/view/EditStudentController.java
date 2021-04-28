@@ -5,14 +5,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ch.makery.address.model.Student;
 
 /**
- * Dialog to edit details of a person.
+ * Dialog to edit details of a student.
  *
  * @author Marco Jakob
  */
@@ -46,7 +45,7 @@ public class EditStudentController {
 
 
     private Stage dialogStage;
-    private Student person;
+    private Student student;
     private boolean okClicked = false;
 
     // Reference to the main application.
@@ -102,12 +101,12 @@ public class EditStudentController {
 
 
     /**
-     * Sets the person to be edited in the dialog.
+     * Sets the student to be edited in the dialog.
      *
      * @param student
      */
     public void setStudent(Student student) {
-        this.person = student;
+        this.student = student;
 
         idField.setText(Integer.toString(student.getID()));
         firstNameField.setText(student.getFirstName());
@@ -159,21 +158,21 @@ public class EditStudentController {
     private void handleOk() {
 
         if (isInputValid()) {
-            person.setFirstName(firstNameField.getText());
-            person.setLastName(lastNameField.getText());
-            person.setID(Integer.parseInt(idField.getText()));
-            person.setPromo(promotionBox.getValue());
+            student.setFirstName(firstNameField.getText());
+            student.setLastName(lastNameField.getText());
+            student.setID(Integer.parseInt(idField.getText()));
+            student.setPromo(promotionBox.getValue());
             if (promotionBox.getValue().equals("L3")){
-                person.setSpeciality(null);
+                student.setSpeciality(null);
             }
             else {
-                person.setSpeciality(optionBox.getValue());
+                student.setSpeciality(optionBox.getValue());
             }
-            person.setBirthyear(birthYearSpinner.getValue());
+            student.setBirthyear(birthYearSpinner.getValue());
             confirm(dialogStage);
             okClicked = true;
             if (mainApp.getState().equals("Add")) {
-                mainApp.getStudentData().add(person); //on ajoute l'étudiant
+                mainApp.getStudentData().add(student); //on ajoute l'étudiant
                 mainApp.setState("View"); //On affiche la page view avec le view disable
             }
             mainApp.showStudentOverview(); //On affiche la page View

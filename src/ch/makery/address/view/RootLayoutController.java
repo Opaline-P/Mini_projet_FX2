@@ -73,10 +73,10 @@ public class RootLayoutController {
 
     /**
      * Called when the user clicks the new button. Opens a dialog to edit
-     * details for a new person.
+     * details for a new student.
      */
     @FXML
-    private void handleNewPerson() {
+    private void handleNewStudent() {
         Student tempStudent = new Student();
         mainApp.setState("Add");
         setDisabledButton();

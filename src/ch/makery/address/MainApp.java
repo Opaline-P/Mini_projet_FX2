@@ -114,11 +114,11 @@ import javafx.stage.Stage;
 
 
         /**
-         * Shows the person overview inside the root layout.
+         * Shows the student overview inside the root layout.
          */
         public void showHomePage() {
             try {
-                // Load person overview.
+                // Load student overview.
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(MainApp.class.getResource("view/HomePage.fxml"));
                 AnchorPane HomePage = (AnchorPane) loader.load();
@@ -197,14 +197,14 @@ import javafx.stage.Stage;
         }
 
         /**
-         * Opens a dialog to edit details for the specified person. If the user
-         * clicks OK, the changes are saved into the provided person object and true
+         * Opens a dialog to edit details for the specified student. If the user
+         * clicks OK, the changes are saved into the provided student object and true
          * is returned.
          *
-         * @param student the person object to be edited
+         * @param student the student object to be edited
          * @return true if the user clicked OK, false otherwise.
          */
-        public void showPersonDialog(Student student) {
+        public void showStudentDialog(Student student) {
             try {
                 // Load the fxml file and create a new stage for the popup dialog.
                 FXMLLoader loader = new FXMLLoader();

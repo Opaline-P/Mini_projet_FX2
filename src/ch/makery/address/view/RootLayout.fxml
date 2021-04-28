@@ -21,7 +21,7 @@
                 <ButtonBar prefHeight="40.0" prefWidth="513.0" AnchorPane.rightAnchor="10.0">
                     <buttons>
                         <Button fx:id="viewButton" mnemonicParsing="false" onAction="#clickViewButton" styleClass="generalbutton" text="View Student List" />
-                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleNewPerson" text="Add a new student" />
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleNewStudent" text="Add a new student" />
                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#clickEditButton" text="Edit a student information" />
                     </buttons>
                 </ButtonBar>

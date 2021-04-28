@@ -55,7 +55,7 @@ public class StudentOverviewController {
      */
     @FXML
     private void initialize() {
-        // Initialize the person table with the two columns.
+        // Initialize the student table with the 6 columns.
         idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
@@ -94,18 +94,18 @@ public class StudentOverviewController {
     private Predicate<Student> createPredicate(String searchText){
         return student -> {
             if (searchText == null || searchText.isEmpty()) return true;
-            return searchFindsPerson(student, searchText);
+            return searchFindsStudent(student, searchText);
         };
     }
 
 
     /**
-     * Search if a person is containing the string in the search bar
-     * @param student the person to compare with the search bar (id, names)
+     * Search if a student is containing the string in the search bar
+     * @param student the student to compare with the search bar (id, names)
      * @param searchText the search bar text
-     * @return true si the person is corresponding to the search false if not
+     * @return true if the student is corresponding to the search false if not
      */
-    private boolean searchFindsPerson(Student student, String searchText){
+    private boolean searchFindsStudent(Student student, String searchText){
         return (student.getFirstName().toLowerCase().contains(searchText.toLowerCase())) ||
                 (student.getLastName().toLowerCase().contains(searchText.toLowerCase())) ||
                 Integer.valueOf(student.getID()).toString().contains(searchText); //ou .equals
@@ -119,10 +119,10 @@ public class StudentOverviewController {
 
     /**
      * Called when the user clicks the new button.
-     * Opens a dialog to add details for a new person.
+     * Opens a dialog to add details for a new student.
      */
     @FXML
-    private void handleNewPerson() {
+    private void handleNewStudent() {
         Student tempStudent = new Student();
         mainApp.setState("Add");
         boolean okClicked = mainApp.showStudentEditDialog(tempStudent);
@@ -142,11 +142,11 @@ public class StudentOverviewController {
     }
 
     /**
-     * Called when the user clicks the person to edit or to show. Opens a dialog to edit
-     * details for the selected person.
+     * Called when the user clicks the student to edit or to show. Opens a dialog to edit
+     * details for the selected student.
      */
     @FXML
-    private void handleEditPerson() {
+    private void handleEditStudent() {
         if (mainApp.getState()=="Edit") {
             Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
             if (selectedStudent != null) {
@@ -157,8 +157,8 @@ public class StudentOverviewController {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(mainApp.getPrimaryStage());
                 alert.setTitle("No Selection");
-                alert.setHeaderText("No Person Selected");
-                alert.setContentText("Please select a person in the table.");
+                alert.setHeaderText("No Student Selected");
+                alert.setContentText("Please select a student in the table.");
 
                 alert.showAndWait();
             }
@@ -166,14 +166,14 @@ public class StudentOverviewController {
             Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
             if (selectedStudent != null) {
                 mainApp.setState("Show");
-                mainApp.showPersonDialog(selectedStudent);
+                mainApp.showStudentDialog(selectedStudent);
             } else {
                 // Nothing selected.
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(mainApp.getPrimaryStage());
                 alert.setTitle("No Selection");
-                alert.setHeaderText("No Person Selected");
-                alert.setContentText("Please select a person in the table.");
+                alert.setHeaderText("No Student Selected");
+                alert.setContentText("Please select a student in the table.");
 
                 alert.showAndWait();
             }
