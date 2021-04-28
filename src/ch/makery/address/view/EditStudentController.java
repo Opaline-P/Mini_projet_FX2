@@ -58,7 +58,7 @@ public class EditStudentController {
     @FXML
     private void initialize() {
         //// Spinner ////
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1950, 2100);
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1950, 2100, 1999);
         birthYearSpinner.setValueFactory(valueFactory);
         birthYear = birthYearSpinner.getValue();
         birthYearSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
@@ -111,6 +111,8 @@ public class EditStudentController {
         idField.setText(Integer.toString(student.getID()));
         firstNameField.setText(student.getFirstName());
         lastNameField.setText(student.getLastName());
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1950, 2100, student.getBirthyear());
+        birthYearSpinner.setValueFactory(valueFactory);
 
         promotionBox.setValue(student.getPromo());
         if (student.getPromo().equals("M1") || student.getPromo().equals("M2")) {
