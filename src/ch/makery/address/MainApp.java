@@ -63,7 +63,6 @@ import javafx.stage.Stage;
             initRootLayout();
 
             showHomePage();
-            //showStudentOverview();
 
             // to ask a confirmation before exit
             primaryStage.setOnCloseRequest(event -> {
@@ -99,15 +98,11 @@ import javafx.stage.Stage;
                 // Load root layout from fxml file.
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(ch.makery.address.MainApp.class.getResource("view/RootLayout.fxml"));
-                //loader.setLocation(MainApp.class.getResource("C:\\Users\\opali\\Documents\\Cours\\M1 G_Phy\\S2\\IHM\\JavaFX\\JavaFXtuto\\src\\ch\\makery\\address\\view\\RootLayout.fxml"));
                 rootLayout = (BorderPane) loader.load();
 
                 // Show the scene containing the root layout.
                 Scene scene = new Scene(rootLayout);
-                //scene.getStylesheets().add(getClass().getResource("applicationStyle.css").toExternalForm());
                 primaryStage.setScene(scene);
-                //primaryStage.setHeight(400);
-                //primaryStage.setWidth(700);
 
                 // Give the controller access to the main app.
                 rootController = loader.getController();
@@ -185,14 +180,6 @@ import javafx.stage.Stage;
                 loader.setLocation(ch.makery.address.MainApp.class.getResource("view/EditStudent.fxml"));
                 AnchorPane page = (AnchorPane) loader.load();
 
-            /*// Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Student");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);*/
-
                 // Set student overview into the center of root layout.
                 rootLayout.setCenter(page);
                 rootController.setVisibleMessage(true);
@@ -200,15 +187,12 @@ import javafx.stage.Stage;
 
                 // Set the student into the controller.
                 EditStudentController controller = loader.getController();
-                //controller.setDialogStage(dialogStage);
                 controller.setStudent(student);
                 controller.setMainApp(this);
 
-                // Show the dialog and wait until the user closes it
-                //dialogStage.showAndWait();
-
                 return controller.isOkClicked();
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 e.printStackTrace();
                 return false;
             }

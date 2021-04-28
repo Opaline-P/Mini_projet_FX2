@@ -55,13 +55,15 @@ public class RootLayoutController {
      */
     public void setVisibleMessage(Boolean bool){
         messageLabel.setVisible(bool);
-        if (mainApp.getState()=="Edit") {
+        if (mainApp.getState().equals("Edit")) {
             leftBorderAnchor.setPrefWidth(93);
             messageLabel.setText("You are editing a student information");
-        }if (mainApp.getState()=="Add") {
+        }
+        if (mainApp.getState().equals("Add")) {
             leftBorderAnchor.setPrefWidth(93);
             messageLabel.setText("You are adding a new student");
-        }if (bool.equals(false)){
+        }
+        if (bool.equals(false)){
             leftBorderAnchor.setPrefWidth(7);
         }
     }
@@ -74,18 +76,8 @@ public class RootLayoutController {
     private void handleNewPerson() {
         Student tempStudent = new Student();
         mainApp.setState("Add");
-        /*//edit Button
-        editButton.setDisable(false);
-        //view Button
-        viewButton.setDisable(false);
-        //add Button
-        addButton.setDisable(true);*/
         setDisabledButton();
         boolean okClicked = mainApp.showStudentEditDialog(tempStudent);
-        /*if (okClicked) {
-            mainApp.getStudentData().add(tempStudent);
-        }
-        setMainApp(this.mainApp);*/
     }
 
 
@@ -95,22 +87,10 @@ public class RootLayoutController {
      */
     @FXML
     private void clickEditButton() {
-        //this.state = "Edit";
         mainApp.setState("Edit");
-        /*//edit Button
-        editButton.setDisable(true);
-        //view Button
-        viewButton.setDisable(false);
-        //add Button
-        addButton.setDisable(false);*/
 
         setDisabledButton();
         mainApp.showStudentOverview();
-        //search Box
-        /*handleClearSearchText();
-        searchBox.setPromptText("Which student do you want to edit ?");
-        searchAnchorPane.setLeftAnchor(searchStackPane, 100.0);
-        searchAnchorPane.setRightAnchor(searchStackPane, 100.0);*/
     }
 
     /**
@@ -119,23 +99,10 @@ public class RootLayoutController {
      */
     @FXML
     private void clickViewButton() {
-        //this.state = "View";
         mainApp.setState("View");
-        /*//edit Button
-        editButton.setDisable(false);
-        //view Button
-        viewButton.setDisable(true);
-        //add Button
-        addButton.setDisable(false);*/
 
         setDisabledButton();
         mainApp.showStudentOverview();
-        //viewButton.setStyle("-fx-background-color: -secondary; -fx-text-fill: -primary");
-        /*//search Box
-        handleClearSearchText();
-        searchBox.setPromptText("Search...");
-        searchAnchorPane.setLeftAnchor(searchStackPane, 400.0);
-        searchAnchorPane.setRightAnchor(searchStackPane, 20.0);*/
     }
 
     /**
@@ -144,14 +111,7 @@ public class RootLayoutController {
      */
     @FXML
     private void clickLogoButton() {
-        //this.state = "View";
         mainApp.setState("Home");
-        /*//edit Button
-        editButton.setDisable(false);
-        //view Button
-        viewButton.setDisable(false);
-        //add Button
-        addButton.setDisable(false);*/
         setDisabledButton();
         mainApp.showHomePage();
 

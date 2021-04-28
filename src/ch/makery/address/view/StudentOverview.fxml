@@ -15,17 +15,6 @@
     <children>
         <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" styleClass="transparent-anchorpane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <!--<AnchorPane maxHeight="58.0" minHeight="50.0" minWidth="0.0" prefHeight="55.0" prefWidth="698.0">
-                     <children>
-                        <ButtonBar prefHeight="40.0" prefWidth="513.0" AnchorPane.rightAnchor="10.0">
-                          <buttons>
-                            <Button fx:id="viewButton" mnemonicParsing="false" onAction="#clickViewButton" styleClass="generalbutton" text="View Student List" />
-                              <Button mnemonicParsing="false" onAction="#handleNewPerson" text="Add a new student" />
-                              <Button fx:id="editButton" mnemonicParsing="false" onAction="#clickEditButton" text="Edit a student information" />
-                          </buttons>
-                        </ButtonBar>
-                     </children>
-                  </AnchorPane>-->
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="transparent-anchorpane">
                     <children>
                         <StackPane fx:id="searchStackPane" layoutX="95.0" prefHeight="30.0" prefWidth="467.0" styleClass="highlight-rectangle" stylesheets="@applicationStyle.css" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="1.0">
@@ -77,6 +66,5 @@
                 <ColorAdjust contrast="0.27" />
             </effect>
         </SplitPane>
-        <!--      <ToggleButton mnemonicParsing="false" prefHeight="84.0" prefWidth="88.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="2.0" />-->
     </children>
 </AnchorPane>

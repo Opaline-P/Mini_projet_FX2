@@ -53,8 +53,6 @@ public class StudentOverviewController {
     @FXML
     private Button viewButton;
 
-    //private String state = "View";
-
 
 
     // Reference to the main application.
@@ -75,25 +73,14 @@ public class StudentOverviewController {
     private void initialize() {
         // Initialize the person table with the two columns.
         idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-        //idColumn.setCellFactory(col -> new IntegerEditingCell());
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         birthyearColumn.setCellValueFactory(cellData -> cellData.getValue().birthyearProperty());
         promoColumn.setCellValueFactory(cellData -> cellData.getValue().promoProperty());
         specialityColumn.setCellValueFactory(cellData -> cellData.getValue().specialityProperty());
 
-
-        // Clear person details.
-        //showPersonDetails(null);
-
-        // Listen for selection changes and show the person details when changed.
-        //personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
-
         //Management of the search box with predicate
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(createPredicate(newValue)));
-
-        //editButton.onActionProperty().addListener((observable, oldValue, newValue) -> this.editButton.setDisable(true));
-
     }
 
     /**
@@ -103,9 +90,6 @@ public class StudentOverviewController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-
-        // Add observable list data to the table
-        //personTable.setItems(this.mainApp.getPersonData());
 
         //Filtered list when we are searching a student
         filteredData = new FilteredList<>(FXCollections.observableList(this.mainApp.getStudentData()));
@@ -143,34 +127,6 @@ public class StudentOverviewController {
                 Integer.valueOf(student.getID()).toString().contains(searchText); //ou .equals
     }
 
-
-    /**
-     * Fills all text fields to show details about the person.
-     * If the specified person is null, all text fields are cleared.
-     *
-     * @param person the person or null
-     */
-    /*private void showPersonDetails(Person person) {
-        if (person != null) {
-            // Fill the labels with info from the person object.
-            firstNameLabel.setText(person.getFirstName());
-            lastNameLabel.setText(person.getLastName());
-            streetLabel.setText(person.getStreet());
-            //postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
-            cityLabel.setText(person.getCity());
-
-            birthdayLabel.setText(DateUtil.format(person.getBirthday()));
-        } else {
-            // Person is null, remove all the text.
-            firstNameLabel.setText("");
-            lastNameLabel.setText("");
-            streetLabel.setText("");
-            postalCodeLabel.setText("");
-            cityLabel.setText("");
-            birthdayLabel.setText("");
-        }
-    }*/
-
     /**
      * Called when the user clicks on the delete button.
      */
@@ -193,7 +149,6 @@ public class StudentOverviewController {
 
     public void handleClearSearchText() {
         searchBox.setText("");
-        //event.consume();
     }
 
 
@@ -206,10 +161,6 @@ public class StudentOverviewController {
         Student tempStudent = new Student();
         mainApp.setState("Add");
         boolean okClicked = mainApp.showStudentEditDialog(tempStudent);
-        /*if (okClicked) {
-            mainApp.getStudentData().add(tempStudent);
-        }
-        setMainApp(this.mainApp);*/
     }
 
     /**
@@ -218,12 +169,6 @@ public class StudentOverviewController {
      */
     @FXML
     private void clickEditButton() {
-        /*//this.state = "Edit";
-        mainApp.setState("Edit");
-        //edit Button
-        editButton.setDisable(true);
-        //view Button
-        viewButton.setDisable(false);*/
         //search Box
         handleClearSearchText();
         searchBox.setPromptText("Which student do you want to edit ?");
@@ -238,16 +183,12 @@ public class StudentOverviewController {
      */
     @FXML
     private void handleEditPerson() {
-        //if (state=="Edit") {
         if (mainApp.getState()=="Edit") {
             Student selectedStudent = personTable.getSelectionModel().getSelectedItem();
             if (selectedStudent != null) {
                 boolean okClicked = mainApp.showStudentEditDialog(selectedStudent);
-                if (okClicked) {
-                    //showPersonDetails(selectedPerson);
-                }
-
-            } else {
+            }
+            else {
                 // Nothing selected.
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(mainApp.getPrimaryStage());
@@ -266,13 +207,6 @@ public class StudentOverviewController {
      */
     @FXML
     private void clickViewButton() {
-       /* //this.state = "View";
-        mainApp.setState("View");
-        //edit Button
-        editButton.setDisable(false);
-        //view Button
-        viewButton.setDisable(true);*/
-        //viewButton.setStyle("-fx-background-color: -secondary; -fx-text-fill: -primary");
         //search Box
         handleClearSearchText();
         searchBox.setPromptText("Search...");

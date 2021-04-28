@@ -60,7 +60,6 @@ public class EditStudentController {
     private void initialize() {
         //// Spinner ////
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1950, 2100);
-        //valueFactory.setValue(student.getBirthYear());
         birthYearSpinner.setValueFactory(valueFactory);
         birthYear = birthYearSpinner.getValue();
         birthYearSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
@@ -114,10 +113,6 @@ public class EditStudentController {
         firstNameField.setText(student.getFirstName());
         lastNameField.setText(student.getLastName());
 
-        /*promoField.setText(student.getPromo());
-        specialityField.setText(student.getSpeciality());
-        birthyearField.setText(Integer.toString(student.getBirthyear()));
-*/
         promotionBox.setValue(student.getPromo());
         if (student.getPromo().equals("M1") || student.getPromo().equals("M2")) {
             optionBox.setValue(student.getSpeciality());
@@ -132,19 +127,15 @@ public class EditStudentController {
         String promotion = promotionBox.getValue();
         if (promotion.equals("L3")) {
             optionBox.setDisable(true);
-            //optionBox.setValue(null);
         }
         else {
             optionBox.setDisable(false);
         }
         return promotionBox.getValue();
-        //
-        //return(promotion);
     }
+
     public String getOption (ActionEvent e) {
         if (getPromotion(e).equals("M1") || getPromotion(e).equals("M2")) {
-            //String option = optionBox.getValue();
-            //return option;
             return optionBox.getValue();
         }
         else {
@@ -155,7 +146,7 @@ public class EditStudentController {
     /**
      * Returns true if the user clicked OK, false otherwise.
      *
-     * @return
+     * @return okClicked boolean
      */
     public boolean isOkClicked() {
         return okClicked;
@@ -166,28 +157,54 @@ public class EditStudentController {
      */
     @FXML
     private void handleOk() {
+        confirm(dialogStage);
         if (isInputValid()) {
             person.setFirstName(firstNameField.getText());
             person.setLastName(lastNameField.getText());
             person.setID(Integer.parseInt(idField.getText()));
-            //person.setPromo(promoField.getText());
             person.setPromo(promotionBox.getValue());
-            //person.setSpeciality(specialityField.getText());
             if (promotionBox.getValue().equals("L3")){
                 person.setSpeciality(null);
-            }else{
+            }
+            else {
                 person.setSpeciality(optionBox.getValue());
             }
-            //person.setBirthyear(Integer.parseInt(birthyearField.getText()));
             person.setBirthyear(birthYearSpinner.getValue());
 
             okClicked = true;
-            if (mainApp.getState()=="Add") {
+            if (mainApp.getState().equals("Add")) {
                 mainApp.getStudentData().add(person); //on ajoute l'étudiant
                 mainApp.setState("View"); //On affiche la page view avec le view disable
             }
             mainApp.showStudentOverview(); //On affiche la page View
-            //dialogStage.close();
+        }
+    }
+
+
+    /**
+     * asked a confirmation before addind a student
+     * @param stage Stage
+     */
+    public void confirm (Stage stage) {
+        // pop up window before exiting
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm");
+        if (mainApp.getState().equals("Edit")) {
+            alert.setHeaderText("You're about to edit a student !");
+            alert.setContentText("Are you sure you want to edit this student ? ");
+        }
+        if (mainApp.getState().equals("Add")) {
+            alert.setHeaderText("You're about to add a student !");
+            alert.setContentText("Are you sure you want to add this student ? ");
+        }
+
+        if (alert.showAndWait().get() == ButtonType.OK) { // if user click on OK button
+            if (mainApp.getState().equals("Edit")) {
+                System.out.println("Student edit with success !");
+            }
+            if (mainApp.getState().equals("Add")) {
+                System.out.println("Student add with success !");
+            }
         }
     }
 
@@ -218,7 +235,8 @@ public class EditStudentController {
         }
         if (idField.getText() == null || idField.getText().length() == 0) {
             errorMessage += "No valid id!\n";
-        }else {
+        }
+        else {
             // try to parse the postal code into an int.
             try {
                 Integer.parseInt(idField.getText());
@@ -227,27 +245,16 @@ public class EditStudentController {
             }
         }
 
-        /*if (promoField.getText() == null || promoField.getText().length() == 0) {
-            errorMessage += "No valid promo!\n";
-        }*/
-
         if (promotionBox.getValue().equals("M1") || promotionBox.getValue().equals("M2")) {
             if (optionBox.getValue() == null || optionBox.getValue().length() == 0) {
                 errorMessage += "No valid speciality!\n";
             }
         }
-        /*
-        if (birthyearField.getText() == null || birthyearField.getText().length() == 0) {
-            errorMessage += "No valid birthyear!\n";
-        } *//*else {
-            if (!DateUtil.validDate(birthyearField.getText())) {
-                errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
-            }
-        }*/
 
         if (errorMessage.length() == 0) {
             return true;
-        } else {
+        }
+        else {
             // Show the error message.
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(dialogStage);
@@ -261,29 +268,4 @@ public class EditStudentController {
         }
     }
 
-
-
-    /**
-     * Called when the user clicks the edit button. Opens the list of students
-     * to chose the one to edit.
-     *//*
-    @FXML
-    private void clickEditButton() {
-        //edit Button
-        editButton.setDisable(true);
-        //view Button
-        viewButton.setDisable(false);
-    }*/
-
-    /**
-     * Called when the user clicks the edit button. Opens the list of students
-     * to chose the one to edit.
-     *//*
-    @FXML
-    private void clickViewButton() {
-        //edit Button
-        editButton.setDisable(false);
-        //view Button
-        viewButton.setDisable(true);
-    }*/
 }
