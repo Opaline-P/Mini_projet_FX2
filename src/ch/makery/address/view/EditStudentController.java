@@ -160,24 +160,7 @@ public class EditStudentController {
     private void handleOk() {
 
         if (isInputValid()) {
-            student.setFirstName(firstNameField.getText());
-            student.setLastName(lastNameField.getText());
-            student.setID(Integer.parseInt(idField.getText()));
-            student.setPromo(promotionBox.getValue());
-            if (promotionBox.getValue().equals("L3")){
-                student.setSpeciality(null);
-            }
-            else {
-                student.setSpeciality(optionBox.getValue());
-            }
-            student.setBirthyear(birthYearSpinner.getValue());
             confirm(dialogStage);
-            okClicked = true;
-            if (mainApp.getState().equals("Add")) {
-                mainApp.getStudentData().add(student); //on ajoute l'étudiant
-                mainApp.setState("View"); //On affiche la page view avec le view disable
-            }
-            mainApp.showStudentOverview(); //On affiche la page View
         }
     }
 
@@ -200,12 +183,30 @@ public class EditStudentController {
         }
 
         if (alert.showAndWait().get() == ButtonType.OK) { // if user click on OK button
+            student.setFirstName(firstNameField.getText());
+            student.setLastName(lastNameField.getText());
+            student.setID(Integer.parseInt(idField.getText()));
+            student.setPromo(promotionBox.getValue());
+            if (promotionBox.getValue().equals("L3")){
+                student.setSpeciality(null);
+            }
+            else {
+                student.setSpeciality(optionBox.getValue());
+            }
+            student.setBirthyear(birthYearSpinner.getValue());
+            okClicked = true;
+
             if (mainApp.getState().equals("Edit")) {
                 System.out.println("Student edit with success !");
             }
             if (mainApp.getState().equals("Add")) {
+                mainApp.getStudentData().add(student); //on ajoute l'étudiant
                 System.out.println("Student add with success !");
+                mainApp.setState("View"); //On affiche la page view avec le view disable
             }
+            mainApp.showStudentOverview(); //On affiche la page View
+        }else{
+            alert.close();
         }
     }
 

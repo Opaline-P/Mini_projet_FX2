@@ -52,30 +52,20 @@ public class ShowStudentInformationController {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-    
+
     /**
-     * Fills all text fields to show details about the student.
-     *
+     * Is called by the main application to give a reference back to itself.
+     * @param mainApp
+     */
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+        this.studentData = mainApp.getStudentData();
+        //studentTable.setItems(mainApp.getStudentData());
+    }
+    /**
+     * Show the student information on the ShowInformationPage.
      * @param student the student or null
      */
-    /*private void showPersonDetails(Student student) {
-        if (student != null) {
-            // Fill the labels with info from the person object.
-            firstNameLabel.setText(student.getFirstName());
-            lastNameLabel.setText(student.getLastName());
-            promoLabel.setText(student.getPromo());
-            if (student.getPromo().equals("M1") || student.getPromo().equals("M2")) {
-                specialityLabel.setText(student.getSpeciality());
-            }
-            else {
-                specialityLabel.setText(null);
-            }
-
-            birthdayLabel.setText(Integer.toString(student.getBirthyear()));
-
-        }
-    }*/
-
     public void getStudent (Student student) {
         this.student = student;
 
@@ -93,50 +83,24 @@ public class ShowStudentInformationController {
             optionLabel.setVisible(false);
         }
     }
-    /**
-     * Is called by the main application to give a reference back to itself.
-     *
-     * @param mainApp
-     */
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-        this.studentData = mainApp.getStudentData();
-        //studentTable.setItems(mainApp.getStudentData());
-    }
 
-    /**
-     * Called when the user clicks on the delete button.
-     *//*
-    @FXML
-    private void handleDeletePerson() {
-        int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-            studentTable.getItems().remove(selectedIndex);
-        } else {
-            // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
-
-            alert.showAndWait();
-        }
-    }*/
 
     /**
      * Called when the user clicks on the delete button.
      */
     @FXML
     private void handleDeleteStudent() {
-        this.studentData.remove(this.student);
-        mainApp.showStudentOverview(); //On affiche la page View
+        confirm(dialogStage);
     }
 
     @FXML
     private void handleEditStudent() {
+
         mainApp.setState("Edit");
+        confirm(dialogStage);
         mainApp.showStudentEditDialog(this.student);
+        // to ask a confirmation before exit
+
     }
 
     /**
@@ -144,8 +108,38 @@ public class ShowStudentInformationController {
     */
     @FXML
     private void handleCancel() {
-        mainApp.setState("View"); //On affiche la page view avec le view disable
-        mainApp.showStudentOverview();
+        if(mainApp.getState()=="Show") {
+            mainApp.setState("View"); //On affiche la page view avec le view disable
+            mainApp.showStudentOverview();
+        }
+    }
+
+    /**
+     * asked a confirmation before delete a student
+     * @param stage Stage
+     */
+    public void confirm (Stage stage) {
+        // pop up window before delete
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm");
+
+        if (mainApp.getState().equals("Show")) {
+            alert.setHeaderText("You're about to delete a student !");
+            alert.setContentText("Are you sure you want to delete this student ? ");
+
+            if (alert.showAndWait().get() == ButtonType.OK) { // if user click on OK button
+                this.studentData.remove(this.student);
+                mainApp.setState("View");
+                mainApp.showStudentOverview(); //On affiche la page View
+            }else{
+                alert.close();
+            }
+
+        }else if (mainApp.getState().equals("Edit")) {
+            alert.setHeaderText("You're about to edit the student !");
+            alert.setContentText("Are you sure you want to continue ? ");
+        }
+
     }
 
 }
