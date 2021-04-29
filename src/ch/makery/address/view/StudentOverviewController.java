@@ -11,6 +11,13 @@ import javafx.scene.layout.StackPane;
 
 import java.util.function.Predicate;
 
+/**
+ * Page to show the table of students.
+ *
+ *  @author Group 35
+ * IHM Project - Java FX programmming
+ */
+
 public class StudentOverviewController {
     @FXML
     private TableView<Student> studentTable;
