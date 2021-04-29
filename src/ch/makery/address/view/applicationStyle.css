@@ -1,4 +1,8 @@
-
+/*====================================*/
+/*         The Application CSS        */
+/*          @author Group 35          */
+/* IHM Project - Java FX programmming */
+/*====================================*/
 .root{
     -primary: #e8d9ef;
     -secondary: #703867;
@@ -80,8 +84,6 @@
     -fx-background-radius: 15px;
     -fx-opacity: 0.9;
 }
-
-
 
 /*========*/
 /* TABLES */

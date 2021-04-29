@@ -8,7 +8,8 @@ import javafx.beans.property.StringProperty;
 /**
  * Model class for a Student.
  *
- * @author Marco Jakob
+ *  @author Group 35
+ * IHM Project - Java FX programmming
  */
 public class Student {
 
@@ -94,7 +95,7 @@ public class Student {
     }
 
     /**
-     *
+     * Set the last name of the student
      * @param lastName
      */
     public void setLastName(String lastName) {
@@ -118,48 +119,89 @@ public class Student {
     }
 
     /**
-     *
+     * Set the promo of the student
      * @param promo
      */
     public void setPromo(String promo) {
         this.promo.set(promo);
     }
 
+    /**
+     * promoProperty
+     * @return  the  stringProperty of the promo
+     */
     public StringProperty promoProperty() {
         return promo;
     }
 
+    /**
+     * getID
+     * @return the ID
+     */
     public int getID() {
         return id.get();
     }
 
+    /**
+     *Set the id of the student
+     * @param id
+     */
     public void setID(int id) {
         this.id.set(id);
     }
 
+    /**
+     * idProperty
+     * @return   the  stringProperty of the id
+     */
     public IntegerProperty idProperty() {
         return id;
     }
 
+    /**
+     * getSpeciality
+     * @return  the Speciality
+     */
     public String getSpeciality() {
         return speciality.get();
     }
 
+    /**
+     *Set the speciality  of the student
+     * @param speciality
+     */
     public void setSpeciality(String speciality) {
         this.speciality.set(speciality);
     }
 
+    /**
+     * specialityProperty
+     * @return  the  stringProperty of the speciality
+     */
     public StringProperty specialityProperty() {
         return speciality;
     }
 
+    /**
+     * getBirthyear
+     * @return  the birthyear
+     */
     public Integer getBirthyear() {
         return birthyear.get();
     }
 
+    /**
+     *Set the birthyear  of the student
+     * @param birthyear
+     */
     public void setBirthyear(Integer birthyear) {
         this.birthyear.set(birthyear);
     }
+
+    /**
+     * birthyearProperty
+     * @return  the  stringProperty of the birthyear
+     */
 
     public IntegerProperty birthyearProperty() {
         return birthyear;

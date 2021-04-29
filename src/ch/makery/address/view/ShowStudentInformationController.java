@@ -1,5 +1,10 @@
 package ch.makery.address.view;
-
+/**
+ * Show student information page for a selected student
+ *
+ *  @author Group 35
+ * IHM Project - Java FX programmming
+ */
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Student;
 import javafx.collections.FXCollections;
@@ -11,7 +16,6 @@ import javafx.stage.Stage;
 
 public class ShowStudentInformationController {
     @FXML
-    private TableView<Student> studentTable;
     private ObservableList<Student> studentData = FXCollections.observableArrayList();
     @FXML
     private Label firstNameLabel;
@@ -28,10 +32,7 @@ public class ShowStudentInformationController {
     @FXML
     private Label birthdayLabel;
     @FXML
-    private FilteredList<Student> filteredData;
-
     private Student student;
-
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -46,7 +47,6 @@ public class ShowStudentInformationController {
 
     /**
      * Sets the stage of this dialog.
-     *
      * @param dialogStage
      */
     public void setDialogStage(Stage dialogStage) {
@@ -62,6 +62,7 @@ public class ShowStudentInformationController {
         this.studentData = mainApp.getStudentData();
         //studentTable.setItems(mainApp.getStudentData());
     }
+
     /**
      * Show the student information on the ShowInformationPage.
      * @param student the student or null
@@ -73,7 +74,6 @@ public class ShowStudentInformationController {
         firstNameLabel.setText(student.getFirstName());
         lastNameLabel.setText(student.getLastName());
         birthdayLabel.setText(Integer.toString(student.getBirthyear()));
-
         promoLabel.setText(student.getPromo());
         if (student.getPromo().equals("M1") || student.getPromo().equals("M2")) {
             specialityLabel.setText(student.getSpeciality());
@@ -84,7 +84,6 @@ public class ShowStudentInformationController {
         }
     }
 
-
     /**
      * Called when the user clicks on the delete button.
      */
@@ -93,14 +92,14 @@ public class ShowStudentInformationController {
         confirm(dialogStage);
     }
 
+    /**
+     * Called when the user clicks on the edit button.
+     */
     @FXML
     private void handleEditStudent() {
-
         mainApp.setState("Edit");
         confirm(dialogStage);
         mainApp.showStudentEditDialog(this.student);
-        // to ask a confirmation before exit
-
     }
 
     /**
@@ -109,7 +108,7 @@ public class ShowStudentInformationController {
     @FXML
     private void handleCancel() {
         if(mainApp.getState()=="Show") {
-            mainApp.setState("View"); //On affiche la page view avec le view disable
+            mainApp.setState("View");
             mainApp.showStudentOverview();
         }
     }
@@ -119,7 +118,7 @@ public class ShowStudentInformationController {
      * @param stage Stage
      */
     public void confirm (Stage stage) {
-        // pop up window before delete
+        // pop up window before the delete
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm");
 
@@ -127,15 +126,18 @@ public class ShowStudentInformationController {
             alert.setHeaderText("You're about to delete a student !");
             alert.setContentText("Are you sure you want to delete this student ? ");
 
-            if (alert.showAndWait().get() == ButtonType.OK) { // if user click on OK button
+            // if user click on OK button
+            if (alert.showAndWait().get() == ButtonType.OK) {
                 this.studentData.remove(this.student);
                 mainApp.setState("View");
-                mainApp.showStudentOverview(); //On affiche la page View
-            }else{
+                mainApp.showStudentOverview();
+            }
+            else {
                 alert.close();
             }
 
-        }else if (mainApp.getState().equals("Edit")) {
+        }
+        else if (mainApp.getState().equals("Edit")) {
             alert.setHeaderText("You're about to edit the student !");
             alert.setContentText("Are you sure you want to continue ? ");
         }

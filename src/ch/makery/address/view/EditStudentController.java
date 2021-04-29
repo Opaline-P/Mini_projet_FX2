@@ -13,7 +13,8 @@ import ch.makery.address.model.Student;
 /**
  * Dialog to edit details of a student.
  *
- * @author Marco Jakob
+ *  @author Group 35
+ * IHM Project - Java FX programmming
  */
 public class EditStudentController {
 
@@ -70,16 +71,17 @@ public class EditStudentController {
 
         //// ChoiceBox ////
         promotionBox.getItems().addAll(promotion);
-        promotionBox.setOnAction(this::getPromotion); // pour mettre OnAction sur la choiceBox
+        // pour mettre OnAction sur la choiceBox
+        promotionBox.setOnAction(this::getPromotion);
 
         optionBox.getItems().addAll(option);
-        optionBox.setOnAction(this::getOption); // pour mettre OnAction sur la choiceBox
+        // pour mettre OnAction sur la choiceBox
+        optionBox.setOnAction(this::getOption);
 
     }
 
     /**
      * Sets the stage of this dialog.
-     *
      * @param dialogStage
      */
     public void setDialogStage(Stage dialogStage) {
@@ -89,7 +91,6 @@ public class EditStudentController {
 
     /**
      * Is called by the main application to give a reference back to itself.
-     *
      * @param mainApp
      */
     public void setMainApp(MainApp mainApp) {
@@ -102,7 +103,6 @@ public class EditStudentController {
 
     /**
      * Sets the student to be edited in the dialog.
-     *
      * @param student
      */
     public void setStudent(Student student) {
@@ -146,7 +146,6 @@ public class EditStudentController {
 
     /**
      * Returns true if the user clicked OK, false otherwise.
-     *
      * @return okClicked boolean
      */
     public boolean isOkClicked() {
@@ -158,19 +157,17 @@ public class EditStudentController {
      */
     @FXML
     private void handleOk() {
-
         if (isInputValid()) {
             confirm(dialogStage);
         }
     }
 
-
     /**
-     * asked a confirmation before addind a student
+     * Asked a confirmation before addind a student
      * @param stage Stage
      */
     public void confirm (Stage stage) {
-        // pop up window before exiting
+        // The pop up window before exiting
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm");
         if (mainApp.getState().equals("Edit")) {
@@ -181,7 +178,6 @@ public class EditStudentController {
             alert.setHeaderText("You're about to add a student !");
             alert.setContentText("Are you sure you want to add this student ? ");
         }
-
         if (alert.showAndWait().get() == ButtonType.OK) { // if user click on OK button
             student.setFirstName(firstNameField.getText());
             student.setLastName(lastNameField.getText());
@@ -202,10 +198,13 @@ public class EditStudentController {
             if (mainApp.getState().equals("Add")) {
                 mainApp.getStudentData().add(student); //on ajoute l'étudiant
                 System.out.println("Student add with success !");
-                mainApp.setState("View"); //On affiche la page view avec le view disable
+                //On affiche la page view avec le view disable
+                mainApp.setState("View");
             }
-            mainApp.showStudentOverview(); //On affiche la page View
-        }else{
+            //On affiche la page View
+            mainApp.showStudentOverview();
+        }
+        else {
             alert.close();
         }
     }
@@ -216,14 +215,14 @@ public class EditStudentController {
     @FXML
     private void handleCancel() {
         if (mainApp.getState()=="Add") {
-            mainApp.setState("View"); //On affiche la page view avec le view disable
+            //On affiche la page view avec le view disable
+            mainApp.setState("View");
         }
         mainApp.showStudentOverview();
     }
 
     /**
      * Validates the user input in the text fields.
-     *
      * @return true if the input is valid
      */
     private boolean isInputValid() {
@@ -239,7 +238,6 @@ public class EditStudentController {
             errorMessage += "No valid id!\n";
         }
         else {
-            // try to parse the postal code into an int.
             try {
                 Integer.parseInt(idField.getText());
             } catch (NumberFormatException e) {
