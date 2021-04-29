@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+    FXML page the home page of the application
+    @author Group 35
+    IHM Project - Java FX programmming
+-->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>

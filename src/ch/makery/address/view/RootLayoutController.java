@@ -23,7 +23,6 @@ public class RootLayoutController {
     // Reference to the main application.
     private MainApp mainApp;
 
-
     /**
      * The constructor.
      * The constructor is called before the initialize() method.
@@ -38,7 +37,6 @@ public class RootLayoutController {
     @FXML
     private void initialize() { }
 
-
     /**
      * Is called by the main application to give a reference back to itself.
      *
@@ -50,7 +48,7 @@ public class RootLayoutController {
     }
 
     /**
-     *
+     *Set visibleor not the message label
      * @param bool
      */
     public void setVisibleMessage(Boolean bool){
@@ -82,7 +80,6 @@ public class RootLayoutController {
         setDisabledButton();
         boolean okClicked = mainApp.showStudentEditDialog(tempStudent);
     }
-
 
     /**
      * Called when the user clicks the edit button. Opens the list of students
@@ -134,7 +131,8 @@ public class RootLayoutController {
             //add Button
             addButton.setDisable(false);
 
-        }if (mainApp.getState().equals("View")){
+        }
+        if (mainApp.getState().equals("View")){
             //edit Button
             editButton.setDisable(false);
             //view Button
@@ -142,7 +140,8 @@ public class RootLayoutController {
             //add Button
             addButton.setDisable(false);
 
-        }if (mainApp.getState().equals("Edit")){
+        }
+        if (mainApp.getState().equals("Edit")){
             //edit Button
             editButton.setDisable(true);
             //view Button
@@ -150,7 +149,8 @@ public class RootLayoutController {
             //add Button
             addButton.setDisable(false);
 
-        }if (mainApp.getState().equals("Add")){
+        }
+        if (mainApp.getState().equals("Add")){
             //edit Button
             editButton.setDisable(false);
             //view Button
@@ -159,5 +159,4 @@ public class RootLayoutController {
             addButton.setDisable(true);
         }
     }
-
 }
