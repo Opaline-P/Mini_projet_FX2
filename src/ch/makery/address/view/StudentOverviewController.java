@@ -34,10 +34,6 @@ public class StudentOverviewController {
     private StackPane searchStackPane;
     @FXML
     private AnchorPane searchAnchorPane;
-    @FXML
-    private Button editButton;
-    @FXML
-    private Button viewButton;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -68,9 +64,9 @@ public class StudentOverviewController {
     }
 
     /**
-     * Is called by the main application to give a reference back to itself.
+     * Is called by the main application to give a reference back to itself and use this reference.
      *
-     * @param mainApp
+     * @param mainApp the mainApp used
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -79,6 +75,7 @@ public class StudentOverviewController {
         filteredData = new FilteredList<>(FXCollections.observableList(this.mainApp.getStudentData()));
         studentTable.setItems(filteredData);
 
+        //Maneged the position of the search bar
         if (mainApp.getState()=="Edit") {
             clickEditButton();
         }if (mainApp.getState()=="View") {
@@ -89,7 +86,7 @@ public class StudentOverviewController {
     /**
      * Create the predicate
      * @param searchText the search bar text
-     * @return ?? pas bien compris
+     * @return the predicate
      */
     private Predicate<Student> createPredicate(String searchText){
         return student -> {
@@ -112,34 +109,13 @@ public class StudentOverviewController {
     }
 
 
+    /**
+     * Called when the user click the cross next to the search bar to clear it
+     */
     public void handleClearSearchText() {
         searchBox.setText("");
     }
 
-
-    /**
-     * Called when the user clicks the new button.
-     * Opens a dialog to add details for a new student.
-     */
-    @FXML
-    private void handleNewStudent() {
-        Student tempStudent = new Student();
-        mainApp.setState("Add");
-        boolean okClicked = mainApp.showStudentEditDialog(tempStudent);
-    }
-
-    /**
-     * Called when the user clicks the edit button. Opens the list of students
-     * to chose the one to edit.
-     */
-    @FXML
-    private void clickEditButton() {
-        //search Box
-        handleClearSearchText();
-        searchBox.setPromptText("Which student do you want to edit ?");
-        searchAnchorPane.setLeftAnchor(searchStackPane, 100.0);
-        searchAnchorPane.setRightAnchor(searchStackPane, 100.0);
-    }
 
     /**
      * Called when the user clicks the student to edit or to show. Opens a dialog to edit
@@ -147,7 +123,7 @@ public class StudentOverviewController {
      */
     @FXML
     private void handleEditStudent() {
-        if (mainApp.getState()=="Edit") {
+        if (mainApp.getState()=="Edit") { //on edit table we open the edit dialog
             Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
             if (selectedStudent != null) {
                 boolean okClicked = mainApp.showStudentEditDialog(selectedStudent);
@@ -162,7 +138,7 @@ public class StudentOverviewController {
 
                 alert.showAndWait();
             }
-        }else if (mainApp.getState()=="View") {
+        }else if (mainApp.getState()=="View") { //on view table we open the show student dialog
             Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
             if (selectedStudent != null) {
                 mainApp.setState("Show");
@@ -181,8 +157,22 @@ public class StudentOverviewController {
     }
 
     /**
-     * Called when the user clicks the edit button. Opens the list of students
-     * to chose the one to edit.
+     * Called to edit the search bar for the edit version
+     *
+     */
+    @FXML
+    private void clickEditButton() {
+        //search Box
+        handleClearSearchText();
+        searchBox.setPromptText("Which student do you want to edit ?");
+        searchAnchorPane.setLeftAnchor(searchStackPane, 100.0);
+        searchAnchorPane.setRightAnchor(searchStackPane, 100.0);
+    }
+
+
+    /**
+     * Called to edit the search bar for the view version
+     *
      */
     @FXML
     private void clickViewButton() {

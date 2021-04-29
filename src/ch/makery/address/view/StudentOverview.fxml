@@ -42,7 +42,8 @@
                                         <Insets left="650.0" right="10.0" />
                                     </StackPane.margin>
                                 </Button>
-                            </children></StackPane>
+                            </children>
+                        </StackPane>
                         <TableView fx:id="studentTable" layoutY="27.0" onMouseClicked="#handleEditStudent" onTouchPressed="#handleEditStudent" prefHeight="308.0" prefWidth="698.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
                             <columns>
                                 <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />

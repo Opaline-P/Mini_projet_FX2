@@ -13,14 +13,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
     public class MainApp extends Application {
 
         private Stage primaryStage;
         private BorderPane rootLayout;
-        private String state;
+        private String state; //to manage disabled buttons and others viewing
         private RootLayoutController rootController;
 
         /**
@@ -29,7 +28,7 @@ import javafx.stage.Stage;
         private ObservableList<Student> studentData = FXCollections.observableArrayList();
 
         /**
-         * Constructor
+         * Constructor of the MainApp
          */
         public MainApp() {
             // Add some sample data
@@ -45,21 +44,25 @@ import javafx.stage.Stage;
         }
 
         /**
-         * Returns the data as an observable list of Students.
-         * @return
+         * Getter of StudentData
+         * @return the data as an observable list of Students.
          */
         public ObservableList<Student> getStudentData() {
             return studentData;
         }
 
+        /**
+         * Start the application
+         * @param primaryStage the primary stage used for the application
+         */
         @Override
         public void start(Stage primaryStage) {
             this.primaryStage = primaryStage;
             this.primaryStage.setTitle("GPhyApp");
 
+            //Begin with the home page
             this.state = "Home";
             initRootLayout();
-
             showHomePage();
 
             // to ask a confirmation before exit
@@ -79,7 +82,7 @@ import javafx.stage.Stage;
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Exit");
             alert.setHeaderText("You're about to exit !");
-            alert.setContentText("Are you sure you want to exit ? "); //All information not saved will be lost.");
+            alert.setContentText("Are you sure you want to exit ? ");
 
             if (alert.showAndWait().get() == ButtonType.OK) { // if user click on OK button
                 System.out.println("You successfully exited !");
@@ -164,7 +167,7 @@ import javafx.stage.Stage;
         }
 
         /**
-         * Opens a dialog to edit details for the specified student. If the user
+         * Opens a dialog to edit details for the specified student or to add a student. If the user
          * clicks OK, the changes are saved into the provided student object and true
          * is returned.
          *
@@ -173,12 +176,12 @@ import javafx.stage.Stage;
          */
         public boolean showStudentEditDialog(Student student) {
             try {
-                // Load the fxml file and create a new stage for the popup dialog.
+                // Load student edit dialog.
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(ch.makery.address.MainApp.class.getResource("view/EditStudent.fxml"));
                 AnchorPane page = (AnchorPane) loader.load();
 
-                // Set student overview into the center of root layout.
+                // Set edit and add dialog into the center of root layout.
                 rootLayout.setCenter(page);
                 rootController.setVisibleMessage(true);
                 rootController.setDisabledButton();
@@ -206,12 +209,12 @@ import javafx.stage.Stage;
          */
         public void showStudentDialog(Student student) {
             try {
-                // Load the fxml file and create a new stage for the popup dialog.
+                // Load show student dialog.
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(ch.makery.address.MainApp.class.getResource("view/ShowStudentInformation.fxml"));
                 AnchorPane showStudent = (AnchorPane) loader.load();
 
-                // Set student overview into the center of root layout.
+                // Set the show student dialog into the center of root layout.
                 rootLayout.setCenter(showStudent);
                 rootController.setVisibleMessage(true);
                 rootController.setDisabledButton();
@@ -227,27 +230,31 @@ import javafx.stage.Stage;
         }
 
         /**
-         * Returns the main stage.
+         * Getter of primaryStage
          *
-         * @return primaryStage
+         * @return primaryStage the main stage.
          */
         public Stage getPrimaryStage() {return primaryStage;}
 
         /**
-         * Returns the state
+         * Getter of the state
          *
-         * @return state
+         * @return state the state
          */
         public String getState() {return state;}
 
         /**
          * Setter the state
          *
-         * @param state
+         * @param state the state
          */
         public void setState(String state) {this.state=state;}
 
 
+        /**
+         * The main of MainApp
+         * @param args
+         */
         public static void main(String[] args) {
             launch(args);
         }
